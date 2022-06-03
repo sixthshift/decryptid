@@ -1,4 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(<></>, document.body);
+ReactDOM.render(<div />, document.body);
