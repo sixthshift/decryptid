@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  dev:
+    image: node:16.15.0-alpine3.15
+    working_dir: /usr/src/${PROJECT_NAME}
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - /usr/src/${PROJECT_NAME}/node_modules
+      - .:/usr/src/${PROJECT_NAME}
+
+    entrypoint: sh -c
+      "
+      apk add git;
+      yarn install;
+      yarn serve;
+      "
