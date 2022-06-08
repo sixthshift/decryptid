@@ -8,6 +8,7 @@
     "dbaeumer.vscode-eslint",
     "eg2.vscode-npm-script",
     "orta.vscode-jest",
+    "csstools.postcss",
     "wix.vscode-import-cost"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
