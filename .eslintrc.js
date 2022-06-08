@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     'plugin:jest/recommended',
     'plugin:react/recommended',
+    'plugin:tailwindcss/recommended',
     'airbnb',
   ],
   parserOptions: {
