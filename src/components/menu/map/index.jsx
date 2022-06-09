@@ -8,8 +8,8 @@ import Tile from './tile';
 function Map() {
   return (
     <Menu>
-      <Tile />
       <Stone />
+      <Tile />
       <Shack />
     </Menu>
   );

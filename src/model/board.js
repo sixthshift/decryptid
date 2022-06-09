@@ -1,10 +1,13 @@
-import Tiles from './tiles';
+import { isInteger } from 'lodash';
+import Hex from './hex';
 
-class Board {
-  constructor({ dimension, tiles }) {
-    this.dimension = dimension;
-    this.tiles = new Tiles(tiles);
-    this.hexes = this.tiles.toHexes();
+class Board extends Array {
+  constructor(arg) {
+    if (isInteger(arg)) {
+      super(arg);
+    } else {
+      super(...arg.map((hex) => (new Hex(hex))));
+    }
   }
 }
 
