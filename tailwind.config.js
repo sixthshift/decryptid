@@ -1,3 +1,9 @@
+const { keys } = require('lodash');
+
+const product = (prefixes, suffixes) => prefixes
+  .reduce((acc, prefix) => [...acc, ...suffixes.map((suffix) => [prefix, suffix])], [])
+  .map((tuple) => (tuple.join('-')));
+
 const colors = {
   primary: '#53281a',
   secondary: '#fdefd2',
@@ -50,5 +56,16 @@ module.exports = {
     extend: {},
     gradientColorStops: gradientColours,
   },
+  safelist: [
+    ...product([
+      'fill',
+    ], [
+      ...keys(colors),
+      ...keys(players),
+      ...keys(structures),
+      ...keys(terrains),
+      ...keys(territories),
+    ]),
+  ],
   plugins: [],
 };
