@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Disc({ className }) {
@@ -29,7 +29,7 @@ function Disc({ className }) {
 }
 
 Disc.propTypes = {
-  className: string,
+  className: PropTypes.string,
 };
 
 Disc.defaultProps = {

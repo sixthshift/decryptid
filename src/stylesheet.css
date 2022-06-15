@@ -16,6 +16,10 @@
  */
 @tailwind utilities;
 
+:root {
+	--animation-slide-delay: 1s
+}
+
 html,
 body,
 #root {
@@ -23,9 +27,12 @@ body,
 }
 
 .auto-rotate {
+	@apply flex landscape:flex-col portrait:flex-row;
+}
+.auto-rotate-invert {
 	@apply flex landscape:flex-row portrait:flex-col;
 }
 
-.auto-rotate-invert {
-	@apply flex landscape:flex-col portrait:flex-row;
+.menu > *{
+	@apply first:landscape:flex-col-reverse first:portrait:flex-row-reverse;
 }

@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Cube({ className }) {
@@ -20,7 +20,7 @@ function Cube({ className }) {
 }
 
 Cube.propTypes = {
-  className: string,
+  className: PropTypes.string,
 };
 
 Cube.defaultProps = {
