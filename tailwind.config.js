@@ -53,11 +53,31 @@ module.exports = {
       ...terrains,
       ...territories,
     },
-    extend: {},
+    extend: {
+      keyframes: [
+        ['slide-up', 'translateY(100%)'],
+        ['slide-down', 'translateY(-100%)'],
+        ['slide-left', 'translateX(100%)'],
+        ['slide-right', 'translateX(-100%)'],
+      ].reduce((acc, animation) => ({
+        ...acc,
+        [animation[0]]: {
+          '0%': { opacity: 0, transform: animation[1] },
+          '50%': { opacity: 1 },
+          '100%': { transform: 'translateY(0%)' },
+        },
+      }), {}),
+      animation: ['slide-up', 'slide-down', 'slide-left', 'slide-right']
+        .reduce((acc, animation) => ({
+          ...acc,
+          [animation]: `${animation}  var(--animation-slide-delay) ease-out infinite`,
+        }), {}),
+    },
     gradientColorStops: gradientColours,
   },
   safelist: [
     ...product([
+      'bg',
       'fill',
     ], [
       ...keys(colors),

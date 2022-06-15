@@ -3,7 +3,7 @@ import React from 'react';
 
 function Menu({ children }) {
   return (
-    <div className="flex-wrap gap-4 justify-evenly auto-rotate-invert">
+    <div className="flex-wrap gap-4 justify-center items-center menu auto-rotate">
       { children }
     </div>
   );

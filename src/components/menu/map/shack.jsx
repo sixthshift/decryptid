@@ -1,15 +1,20 @@
 import React from 'react';
-
+import config from '../../../model/config';
 import Icon from '../../icons/shack';
+import ColourMenu from '../colour-menu';
+import MenuItem from '../menu-item';
 
-function Tile() {
+function Shack() {
   return (
-    <div>
-      <button type="button" className="h-14 w-14 flex justify-center items-center border-4 border-primary rounded-full">
-        <Icon className="stroke-primary" />
-      </button>
-    </div>
+    <ColourMenu
+      menuItem={(
+        <MenuItem>
+          <Icon className="stroke-primary" />
+        </MenuItem>
+        )}
+      colours={config.structures.filter((structure) => structure.type === 'shack').map((structure) => structure.colour)}
+    />
   );
 }
 
-export default Tile;
+export default Shack;

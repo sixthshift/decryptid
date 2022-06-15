@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Shack({ className }) {
@@ -26,7 +26,7 @@ function Shack({ className }) {
 }
 
 Shack.propTypes = {
-  className: string,
+  className: PropTypes.string,
 };
 
 Shack.defaultProps = {

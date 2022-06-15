@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import Model from '../../model/hex';
 import { Context } from './board';
 

@@ -1,15 +1,20 @@
 import React from 'react';
-
+import config from '../../../model/config';
 import Icon from '../../icons/disc';
+import ColourMenu from '../colour-menu';
+import MenuItem from '../menu-item';
 
-function Tile() {
+function Disc() {
   return (
-    <div>
-      <button type="button" className="flex justify-center items-center w-14 h-14 rounded-full border-4 border-primary">
-        <Icon className="stroke-primary" />
-      </button>
-    </div>
+    <ColourMenu
+      menuItem={(
+        <MenuItem>
+          <Icon className="stroke-primary" />
+        </MenuItem>
+        )}
+      colours={config.players.map((player) => player.symbol)}
+    />
   );
 }
 
-export default Tile;
+export default Disc;

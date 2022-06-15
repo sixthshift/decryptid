@@ -4,7 +4,7 @@ import Menu from '../menu';
 import Cube from './cube';
 import Disc from './disc';
 
-function Map() {
+function Hint() {
   return (
     <Menu>
       <Cube />
@@ -13,4 +13,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default Hint;

@@ -1,5 +1,5 @@
-import React, { createContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import React, { createContext, useMemo } from 'react';
 import Model from '../../model/board';
 import Hex from './hex';
 

@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Tile({ className }) {
@@ -21,7 +21,7 @@ function Tile({ className }) {
 }
 
 Tile.propTypes = {
-  className: string,
+  className: PropTypes.string,
 };
 
 Tile.defaultProps = {
