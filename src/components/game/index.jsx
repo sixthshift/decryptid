@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Cryptid from '../../model/cryptid';
-import config from '../../model/config';
+import config from '../../config';
 import Board from './board';
 
 function Game() {

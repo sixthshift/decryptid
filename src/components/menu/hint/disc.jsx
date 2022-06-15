@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../model/config';
+import config from '../../../config';
 import Icon from '../../icons/disc';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
