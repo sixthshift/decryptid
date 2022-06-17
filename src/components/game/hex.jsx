@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import Model from '../../model/hex';
-import { Context } from './board';
+import context from './context';
 
 const points = [
   { q: 1, r: 0 },
@@ -12,7 +12,7 @@ const points = [
   { q: 0.5, r: -Math.sqrt(3) / 2 },
 ];
 function Hex({ model }) {
-  const { hexToPixel } = useContext(Context);
+  const { hexToPixel } = useContext(context);
 
   const pixel = hexToPixel(model.coordinates);
 

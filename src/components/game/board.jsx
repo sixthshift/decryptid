@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { createContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Model from '../../model/board';
+import Context from './context';
 import Hex from './hex';
 
 const hexToPixel = (spacing) => ({ q, r }) => ({
@@ -69,6 +70,6 @@ Board.defaultProps = {
   spacing: 0.05,
 };
 
-const Context = createContext();
-export { Context };
+// const Context = createContext();
+// export { Context };
 export default Board;
