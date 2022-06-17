@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-function Shack({ className }) {
+function Shack() {
   return (
-    <svg width="24" height="24" viewBox="0 0 6.35 6.35" className={className} stroke="currentColor">
+    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor">
       <g
         fillOpacity="0"
         strokeLinecap="butt"
@@ -24,13 +23,5 @@ function Shack({ className }) {
     </svg>
   );
 }
-
-Shack.propTypes = {
-  className: PropTypes.string,
-};
-
-Shack.defaultProps = {
-  className: 'stroke-secondary',
-};
 
 export default Shack;

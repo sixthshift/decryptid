@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-function Cube({ className }) {
+function Cube() {
   return (
-    <svg width="24" height="24" className={className} stroke="currentColor">
+    <svg width="24" height="24" stroke="currentColor">
       <g
         fillOpacity="0"
         strokeLinecap="butt"
@@ -18,13 +17,5 @@ function Cube({ className }) {
     </svg>
   );
 }
-
-Cube.propTypes = {
-  className: PropTypes.string,
-};
-
-Cube.defaultProps = {
-  className: 'stroke-secondary',
-};
 
 export default Cube;

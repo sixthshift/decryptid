@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-function Stone({ className }) {
+function Stone() {
   return (
-    <svg width="24" height="24" viewBox="0 0 6.35 6.35" className={className} stroke="currentColor">
+    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor">
       <g
         fillOpacity="0"
         strokeLinecap="butt"
@@ -19,13 +18,5 @@ function Stone({ className }) {
     </svg>
   );
 }
-
-Stone.propTypes = {
-  className: PropTypes.string,
-};
-
-Stone.defaultProps = {
-  className: 'stroke-secondary',
-};
 
 export default Stone;

@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-function Disc({ className }) {
+function Disc() {
   return (
-    <svg width="24" height="24" viewBox="0 0 6.35 6.35" className={className} stroke="currentColor">
+    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor">
       <g
         fillOpacity="0"
         strokeLinejoin="miter"
@@ -27,13 +26,5 @@ function Disc({ className }) {
     </svg>
   );
 }
-
-Disc.propTypes = {
-  className: PropTypes.string,
-};
-
-Disc.defaultProps = {
-  className: 'stroke-secondary',
-};
 
 export default Disc;

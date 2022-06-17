@@ -70,8 +70,11 @@ module.exports = {
       animation: ['slide-up', 'slide-down', 'slide-left', 'slide-right']
         .reduce((acc, animation) => ({
           ...acc,
-          [animation]: `${animation}  var(--animation-slide-delay) ease-out infinite`,
+          [animation]: `${animation}  var(--animation-slide-delay) ease-out`,
         }), {}),
+      minWidth: {
+        sm: '40rem',
+      },
     },
     gradientColorStops: gradientColours,
   },
@@ -79,6 +82,7 @@ module.exports = {
     ...product([
       'bg',
       'fill',
+      'text',
     ], [
       ...keys(colors),
       ...keys(players),
