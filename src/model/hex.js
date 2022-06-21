@@ -2,8 +2,9 @@ import Coordinates from './coordinates';
 
 class Hex {
   constructor({
-    tile, coordinates, terrain, territory,
+    anchor, tile, coordinates, terrain, territory,
   }) {
+    this.anchor = anchor;
     this.tile = tile;
     this.coordinates = new Coordinates(coordinates);
     this.terrain = terrain;

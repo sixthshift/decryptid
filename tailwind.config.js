@@ -36,17 +36,12 @@ const territories = {
   cougar: '#de2215',
   bear: '#000000',
 };
-
-const gradientColours = {
-  'gradient-1': '#ffdd8e',
-  'gradient-2': '#fdefd2',
-  'gradient-3': '#ffdd8e',
-};
-
 module.exports = {
   content: ['./src/*.html', './src/**/*.jsx'],
   theme: {
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
       ...colors,
       ...players,
       ...structures,
@@ -76,7 +71,6 @@ module.exports = {
         sm: '40rem',
       },
     },
-    gradientColorStops: gradientColours,
   },
   safelist: [
     ...product([

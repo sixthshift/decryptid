@@ -106,13 +106,13 @@ export default {
       terrain: 'forest',
     },
     {
-      anchor: true,
       tile: 0,
       coordinates: { q: 5, r: 0, s: -5 },
       terrain: 'forest',
       territory: 'bear',
     },
     {
+      anchor: true,
       tile: 1,
       coordinates: { q: 6, r: -3, s: -3 },
       terrain: 'swamp',

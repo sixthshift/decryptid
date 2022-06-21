@@ -8,7 +8,13 @@ const reducer = (state, action) => {
       return { ...state, selected: null };
     }
     return { ...state, selected: action.payload };
+  } if (action?.type === 'tile') {
+    if (state.mode === 'tile') {
+      return { ...state, mode: null };
+    }
+    return { ...state, mode: 'tile' };
   }
+
   return state;
 };
 
