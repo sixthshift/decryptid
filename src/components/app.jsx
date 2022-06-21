@@ -8,7 +8,7 @@ import MapMenu from './menu/map';
 function App() {
   const context = useReducer(reducer, initialState);
   return (
-    <div className="flex flex-col justify-center w-full min-w-sm h-full bg-gradient-to-br from-gradient-1 via-gradient-2 to-gradient-3">
+    <div className="flex flex-col justify-center w-full min-w-sm h-full bg-secondary">
       <div className="gap-8 items-center p-4 w-full h-full auto-rotate-invert">
         <Context.Provider value={context}>
           <MapMenu />
