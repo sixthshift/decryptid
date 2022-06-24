@@ -13,6 +13,7 @@ function Disc() {
   const selected = state.selected === id;
   const onClick = () => {
     dispatch({ type: 'select', payload: id });
+    dispatch({ type: 'disc' });
   };
   return (
     <ColourMenu

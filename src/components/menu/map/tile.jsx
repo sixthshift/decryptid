@@ -11,7 +11,7 @@ function Tile() {
   const selected = state.selected === id;
   const onClick = () => {
     dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'tile', payload: null });
+    dispatch({ type: 'tile' });
   };
   return (
     <MenuItem onClick={onClick} selected={selected}>

@@ -2,7 +2,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Model from '../../../model/hex';
 import { useUiContext } from '../../context';
 import Anchor from './anchor';
 import { hexToPixel, hexToPoints } from './utils';
@@ -52,7 +51,18 @@ function Hex({ model }) {
 }
 
 Hex.propTypes = {
-  model: PropTypes.instanceOf(Model).isRequired,
+  model: PropTypes.shape({
+    anchor: PropTypes.bool,
+    tile: PropTypes.number,
+    coordinates: PropTypes.shape({
+      q: PropTypes.number,
+      r: PropTypes.number,
+      s: PropTypes.number,
+    }),
+    terrain: PropTypes.string,
+    territory: PropTypes.string,
+    hints: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default Hex;
