@@ -1,14 +1,14 @@
 import { uniqueId } from 'lodash';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import config from '../../../config';
-import uiContext from '../../context';
+import { useUiContext } from '../../context';
 import Icon from '../../icons/stone';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
 
 function Stone() {
   const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useContext(uiContext);
+  const [state, dispatch] = useUiContext();
 
   const selected = state.selected === id;
   const onClick = () => {
