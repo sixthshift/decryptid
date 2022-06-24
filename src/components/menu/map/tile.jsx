@@ -1,12 +1,12 @@
 import { uniqueId } from 'lodash';
-import React, { useContext, useState } from 'react';
-import uiContext from '../../context';
+import React, { useState } from 'react';
+import { useUiContext } from '../../context';
 import Icon from '../../icons/tile';
 import MenuItem from '../menu-item';
 
 function Tile() {
   const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useContext(uiContext);
+  const [state, dispatch] = useUiContext();
 
   const selected = state.selected === id;
   const onClick = () => {

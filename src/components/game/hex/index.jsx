@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import Model from '../../../model/hex';
-import uiContext from '../../context';
-import gameContext from '../context';
+import { useUiContext } from '../../context';
 import Anchor from './anchor';
 import { hexToPixel, hexToPoints } from './utils';
 
@@ -17,7 +17,7 @@ class ViewModel {
     };
   }
 
-  toAnchor() {
+  toMapEdit() {
     this.polygon.body.push(<Anchor key={this.model.anchor} model={this.model} />);
     return this;
   }
@@ -25,15 +25,15 @@ class ViewModel {
   toHex(radius, spacing) {
     const pixel = hexToPixel(radius, spacing, this.model.coordinates);
     this.props.transform = `translate(${pixel.x}, ${pixel.y})`;
-    this.polygon.props.className = `fill-${this.model.terrain} stroke-secondary stroke-2`;
     this.polygon.props.points = hexToPoints(radius).map(({ q, r }) => (`${q}, ${r}`)).join(' ');
+    this.polygon.className = [`fill-${this.model.terrain}`, 'stroke-secondary', 'stroke-2'];
     return this;
   }
 
   render() {
     return (
       <g {...this.props}>
-        <polygon {...this.polygon.props} />
+        <polygon className={classNames(this.polygon.className)} {...this.polygon.props} />
         {[...this.polygon.body]}
       </g>
     );
@@ -41,12 +41,11 @@ class ViewModel {
 }
 
 function Hex({ model }) {
-  const { radius, spacing } = useContext(gameContext);
-  const [state] = useContext(uiContext);
+  const [{ mode, radius, spacing }] = useUiContext();
 
   const viewModel = new ViewModel(model).toHex(radius, spacing);
-  if (state.mode === 'tile' && model.anchor) {
-    viewModel.toAnchor();
+  if (mode === 'tile' && model.anchor) {
+    viewModel.toMapEdit();
   }
 
   return viewModel.render();
