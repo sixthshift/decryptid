@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Model from '../../../model/hex';
 
 function Anchor({ model }) {
   return (
@@ -11,7 +10,18 @@ function Anchor({ model }) {
 }
 
 Anchor.propTypes = {
-  model: PropTypes.instanceOf(Model).isRequired,
+  model: PropTypes.shape({
+    anchor: PropTypes.bool,
+    tile: PropTypes.number,
+    coordinates: PropTypes.shape({
+      q: PropTypes.number,
+      r: PropTypes.number,
+      s: PropTypes.number,
+    }),
+    terrain: PropTypes.string,
+    territory: PropTypes.string,
+    hints: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 export default Anchor;

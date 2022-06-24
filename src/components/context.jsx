@@ -7,16 +7,17 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  if (action?.type === 'select') {
+  if (action.type === 'select') {
     if (action.payload === state.selected) {
-      return { ...state, selected: null };
+      return { ...state, selected: undefined };
     }
     return { ...state, selected: action.payload };
-  } if (action?.type === 'tile') {
-    if (state.mode === 'tile') {
-      return { ...state, mode: null };
-    }
-    return { ...state, mode: 'tile' };
+  }
+  if (action.type === state.mode) {
+    return { ...state, mode: undefined };
+  }
+  if (['cube', 'disc', 'shack', 'stone', 'tile'].includes(action.type)) {
+    return { ...state, mode: action.type };
   }
 
   return state;

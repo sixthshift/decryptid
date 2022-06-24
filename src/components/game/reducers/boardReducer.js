@@ -1,7 +1,7 @@
 import { partition, zip } from 'lodash';
 
 export default (state, action) => {
-  if (action.type === 'FLIP') {
+  if (action.type === 'flip') {
     const id = action.payload;
     const [tile, hexes] = partition(state, (hex) => (hex.tile === id));
     const reversedCoordinates = tile.map((hex) => (hex.coordinates)).reverse();

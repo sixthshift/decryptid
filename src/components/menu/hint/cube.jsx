@@ -13,6 +13,7 @@ function Cube() {
   const selected = state.selected === id;
   const onClick = () => {
     dispatch({ type: 'select', payload: id });
+    dispatch({ type: 'cube' });
   };
   return (
     <ColourMenu

@@ -2,7 +2,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Model from '../../model/hex';
 import { useUiContext } from '../context';
 import { useGameContext } from './context';
 import Hex from './hex';
@@ -17,9 +16,9 @@ class ViewModel {
   }
 
   toMapEdit() {
-    this.className.push('draggable');
+    this.className.push('cursor-move');
     this.props.onDoubleClick = () => {
-      this.dispatch({ type: 'FLIP', payload: this.id });
+      this.dispatch({ type: 'flip', payload: this.id });
     };
     return this;
   }
@@ -49,7 +48,20 @@ function Tile({ id, tile }) {
 }
 
 Tile.propTypes = {
-  tile: PropTypes.arrayOf(PropTypes.instanceOf(Model)).isRequired,
+  tile: PropTypes.arrayOf(
+    PropTypes.shape({
+      anchor: PropTypes.bool,
+      tile: PropTypes.number,
+      coordinates: PropTypes.shape({
+        q: PropTypes.number,
+        r: PropTypes.number,
+        s: PropTypes.number,
+      }),
+      terrain: PropTypes.string,
+      territory: PropTypes.string,
+      hints: PropTypes.arrayOf(PropTypes.string),
+    }),
+  ).isRequired,
 };
 
 export default Tile;
