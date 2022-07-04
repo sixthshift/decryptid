@@ -3,7 +3,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 const initialState = {
   radius: 30,
-  spacing: 0.05,
+  spacing: 0.01,
 };
 
 const reducer = (state, action) => {
