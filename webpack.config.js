@@ -28,6 +28,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Decryptid',
+      meta: {
+        viewport: {
+          name: 'viewport',
+          content: 'width=640',
+        },
+      },
     }),
   ],
   output: {
