@@ -22,12 +22,23 @@ const modelPropType = PropTypes.shape({
 function Hex({ model, children }) {
   const [{ radius, spacing }] = useUiContext();
   const pixel = hexToPixel(radius, spacing, model.coordinates);
+
   const hex = (
     <g transform={`translate(${pixel.x}, ${pixel.y})`}>
       <polygon
         className={classNames([`fill-${model.terrain}`, 'stroke-secondary', 'stroke-2'])}
         points={hexToPoints(radius).map(({ q, r }) => (`${q}, ${r}`)).join(' ')}
       />
+      {
+        model.territory
+          ? (
+            <polygon
+              className={classNames(['fill-transparent', `stroke-${model.territory}`, 'stroke-2'])}
+              points={hexToPoints(radius * 0.85).map(({ q, r }) => (`${q}, ${r}`)).join(' ')}
+            />
+          )
+          : null
+      }
       {children}
     </g>
   );

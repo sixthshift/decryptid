@@ -76,6 +76,7 @@ module.exports = {
     ...product([
       'bg',
       'fill',
+      'stroke',
       'text',
     ], [
       ...keys(colors),
