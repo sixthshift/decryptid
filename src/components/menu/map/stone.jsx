@@ -1,19 +1,17 @@
-import { uniqueId } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import config from '../../../config';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import Icon from '../../icons/stone';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
 
 function Stone() {
-  const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useUiContext();
+  const id = 'stone';
+  const [{ ui: { mode } }, dispatch] = useGameContext();
 
-  const selected = state.selected === id;
+  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'stone' });
+    dispatch({ type: id });
   };
   return (
     <ColourMenu
@@ -22,7 +20,7 @@ function Stone() {
           <Icon />
         </MenuItem>
         )}
-      colours={config.structures.filter((structure) => structure.type === 'stone').map((structure) => structure.colour)}
+      colours={config.players.map((player) => player.symbol)}
       selected={selected}
     />
   );

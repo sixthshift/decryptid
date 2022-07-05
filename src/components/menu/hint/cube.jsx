@@ -1,19 +1,17 @@
-import { uniqueId } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import config from '../../../config';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import Icon from '../../icons/cube';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
 
 function Cube() {
-  const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useUiContext();
+  const id = 'cube';
+  const [{ ui: { mode } }, dispatch] = useGameContext();
 
-  const selected = state.selected === id;
+  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'cube' });
+    dispatch({ type: id });
   };
   return (
     <ColourMenu

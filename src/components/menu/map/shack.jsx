@@ -1,19 +1,17 @@
-import { uniqueId } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import config from '../../../config';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import Icon from '../../icons/shack';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
 
 function Shack() {
-  const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useUiContext();
+  const id = 'shack';
+  const [{ ui: { mode } }, dispatch] = useGameContext();
 
-  const selected = state.selected === id;
+  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'shack' });
+    dispatch({ type: id });
   };
   return (
     <ColourMenu
@@ -22,7 +20,7 @@ function Shack() {
           <Icon />
         </MenuItem>
         )}
-      colours={config.structures.filter((structure) => structure.type === 'shack').map((structure) => structure.colour)}
+      colours={config.players.map((player) => player.symbol)}
       selected={selected}
     />
   );

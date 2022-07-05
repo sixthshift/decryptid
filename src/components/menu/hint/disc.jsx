@@ -1,19 +1,17 @@
-import { uniqueId } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import config from '../../../config';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import Icon from '../../icons/disc';
 import ColourMenu from '../colour-menu';
 import MenuItem from '../menu-item';
 
 function Disc() {
-  const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useUiContext();
+  const id = 'disc';
+  const [{ ui: { mode } }, dispatch] = useGameContext();
 
-  const selected = state.selected === id;
+  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'disc' });
+    dispatch({ type: id });
   };
   return (
     <ColourMenu

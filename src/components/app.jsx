@@ -1,6 +1,6 @@
 import React from 'react';
 import '../stylesheet.css';
-import { UiContextProvider } from './context';
+import { GameContextProvider } from './context';
 import Game from './game';
 import HintMenu from './menu/hint';
 import MapMenu from './menu/map';
@@ -9,11 +9,11 @@ function App() {
   return (
     <div className="flex flex-col justify-center w-full h-full bg-secondary touch-none">
       <div className="gap-8 items-center p-4 w-full h-full auto-rotate-invert">
-        <UiContextProvider>
+        <GameContextProvider>
           <MapMenu />
           <Game />
           <HintMenu />
-        </UiContextProvider>
+        </GameContextProvider>
       </div>
     </div>
   );

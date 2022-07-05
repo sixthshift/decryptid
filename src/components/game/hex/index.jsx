@@ -1,13 +1,13 @@
 /* eslint-disable no-multi-assign */
 import classNames from 'classnames';
 import React from 'react';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
 import { hexToPixel, hexToPoints } from './utils';
 import WithMapEdit from './withMapEdit';
 
 function Hex({ model, children }) {
-  const [{ radius, spacing }] = useUiContext();
+  const [{ ui: { radius, spacing } }] = useGameContext();
   const pixel = hexToPixel(radius, spacing, model.coordinates);
 
   const hex = (
@@ -35,7 +35,7 @@ function Hex({ model, children }) {
 
 function Index({ model, children }) {
   let Component = Hex;
-  const [{ mode }] = useUiContext();
+  const [{ ui: { mode } }] = useGameContext();
   if (mode === 'tile') {
     Component = WithMapEdit(Component);
   }
