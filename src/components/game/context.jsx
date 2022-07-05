@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { createContext, useContext, useReducer } from 'react';
 import config from '../../config';
+import { childrenPropType } from './prop-types';
 import reducer from './reducers';
 
 const state = config;
@@ -24,10 +24,7 @@ function GameContextProvider({ children }) {
 }
 
 GameContextProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: childrenPropType.isRequired,
 };
 
 export { GameContext, useGameContext, GameContextProvider };

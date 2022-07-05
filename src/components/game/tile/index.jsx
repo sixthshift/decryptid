@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useUiContext } from '../../context';
 import Hex from '../hex';
+import { classNamesPropType, modelPropType } from '../prop-types';
 import WithMapEdit from './withMapEdit';
 
 function Tile({
@@ -35,33 +36,10 @@ export default Index;
 
 Index.propTypes = Tile.propTypes = {
   id: PropTypes.number.isRequired,
-  tile: PropTypes.arrayOf(
-    PropTypes.shape({
-      anchor: PropTypes.bool,
-      tile: PropTypes.number,
-      coordinates: PropTypes.shape({
-        q: PropTypes.number,
-        r: PropTypes.number,
-        s: PropTypes.number,
-      }),
-      terrain: PropTypes.string,
-      territory: PropTypes.string,
-      hints: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ).isRequired,
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object,
-      ]),
-    ),
-  ]),
+  tile: PropTypes.arrayOf(modelPropType).isRequired,
+  className: classNamesPropType,
 };
 
 Index.defaultProps = Tile.defaultProps = {
   className: '',
-
 };

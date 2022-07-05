@@ -1,23 +1,10 @@
 /* eslint-disable no-multi-assign */
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useUiContext } from '../../context';
+import { childrenPropType, modelPropType } from '../prop-types';
 import { hexToPixel, hexToPoints } from './utils';
 import WithMapEdit from './withMapEdit';
-
-const modelPropType = PropTypes.shape({
-  anchor: PropTypes.bool,
-  tile: PropTypes.number,
-  coordinates: PropTypes.shape({
-    q: PropTypes.number,
-    r: PropTypes.number,
-    s: PropTypes.number,
-  }),
-  terrain: PropTypes.string,
-  territory: PropTypes.string,
-  hints: PropTypes.arrayOf(PropTypes.string),
-});
 
 function Hex({ model, children }) {
   const [{ radius, spacing }] = useUiContext();
@@ -64,11 +51,7 @@ export default Index;
 
 Index.propTypes = Hex.propTypes = {
   model: modelPropType.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: childrenPropType,
 };
 
 Index.defaultProps = Hex.defaultProps = {
