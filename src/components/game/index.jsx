@@ -1,7 +1,6 @@
 import { groupBy } from 'lodash';
 import React from 'react';
-import { useUiContext } from '../context';
-import { GameContextProvider, useGameContext } from './context';
+import { useGameContext } from '../context';
 import Tile from './tile';
 
 const toDimensions = (model, radius, spacing) => {
@@ -33,8 +32,7 @@ const toDimensions = (model, radius, spacing) => {
 };
 
 function Game() {
-  const [{ board }] = useGameContext();
-  const [{ radius, spacing }] = useUiContext();
+  const [{ game: { board }, ui: { radius, spacing } }] = useGameContext();
   const dimensions = toDimensions(board, radius, spacing);
   const tiles = groupBy(board, (hex) => (hex.tile));
 
@@ -53,13 +51,4 @@ function Game() {
   );
 }
 
-// eslint-disable-next-line func-names
-const contextualise = (Component) => function () {
-  return (
-    <GameContextProvider>
-      <Component />
-    </GameContextProvider>
-  );
-};
-
-export default contextualise(Game);
+export default Game;

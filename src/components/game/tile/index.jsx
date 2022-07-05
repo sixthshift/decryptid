@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useUiContext } from '../../context';
+import { useGameContext } from '../../context';
 import Hex from '../hex';
 import { classNamesPropType, modelPropType } from '../prop-types';
 import WithMapEdit from './withMapEdit';
@@ -25,7 +25,7 @@ function Tile({
 
 function Index({ tile, className, ...props }) {
   let Component = Tile;
-  const [{ mode }] = useUiContext();
+  const [{ ui: { mode } }] = useGameContext();
   if (mode === 'tile') {
     Component = WithMapEdit(Component);
   }

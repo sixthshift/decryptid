@@ -1,51 +1,30 @@
 import PropTypes from 'prop-types';
 import React, { createContext, useContext, useReducer } from 'react';
+import reducer from './reducers';
 
-const initialState = {
-  radius: 30,
-  spacing: 0.01,
-};
+const GameContext = createContext();
 
-const reducer = (state, action) => {
-  if (action.type === 'select') {
-    if (action.payload === state.selected) {
-      return { ...state, selected: undefined };
-    }
-    return { ...state, selected: action.payload };
-  }
-  if (action.type === state.mode) {
-    return { ...state, mode: undefined };
-  }
-  if (['cube', 'disc', 'shack', 'stone', 'tile'].includes(action.type)) {
-    return { ...state, mode: action.type };
-  }
-
-  return state;
-};
-
-const UiContext = createContext();
-
-const useUiContext = () => {
-  const context = useContext(UiContext);
+const useGameContext = () => {
+  const context = useContext(GameContext);
   if (context === undefined) {
-    throw new Error('useUiContext was used outside of its Provider');
+    throw new Error('useGameContext was used outside of its Provider');
   }
   return context;
 };
 
-function UiContextProvider({ children }) {
+function GameContextProvider({ children }) {
   return (
-    <UiContext.Provider value={useReducer(reducer, initialState)}>
+    <GameContext.Provider value={useReducer(reducer, reducer(undefined, { type: undefined }))}>
       {children}
-    </UiContext.Provider>
+    </GameContext.Provider>
   );
 }
 
-UiContextProvider.propTypes = {
+GameContextProvider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export { UiContext, useUiContext, UiContextProvider };
+export { GameContext, useGameContext, GameContextProvider };

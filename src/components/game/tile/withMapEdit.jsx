@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { inRange } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
-import { useGameContext } from '../context';
+import { useGameContext } from '../../context';
 import { classNamesPropType, modelPropType } from '../prop-types';
 
 const useDoubleClick = (onDoubleClick) => {

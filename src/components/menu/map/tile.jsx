@@ -1,17 +1,15 @@
-import { uniqueId } from 'lodash';
-import React, { useState } from 'react';
-import { useUiContext } from '../../context';
+import React from 'react';
+import { useGameContext } from '../../context';
 import Icon from '../../icons/tile';
 import MenuItem from '../menu-item';
 
 function Tile() {
-  const [id] = useState(() => uniqueId());
-  const [state, dispatch] = useUiContext();
+  const id = 'tile';
+  const [{ ui: { mode } }, dispatch] = useGameContext();
 
-  const selected = state.selected === id;
+  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: 'select', payload: id });
-    dispatch({ type: 'tile' });
+    dispatch({ type: id });
   };
   return (
     <MenuItem onClick={onClick} selected={selected}>
