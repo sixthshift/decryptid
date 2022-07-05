@@ -2,7 +2,7 @@
 import classNames from 'classnames';
 import { inRange } from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useGameContext } from '../context';
 
 const useDoubleClick = (onDoubleClick) => {
@@ -16,36 +16,50 @@ const useDoubleClick = (onDoubleClick) => {
 const useDragSVG = ({
   onPointerDown, onPointerMove, onPointerUp, dropZones, onDrop,
 }) => {
-  const [dragging, setDragging] = useState(false);
-  const [coordinates, setCoordinates] = useState({ x: undefined, y: undefined });
-  const [deltaCoordinates, setDeltaCoordinates] = useState({ x: 0, y: 0 });
+  const drag = useRef({
+    active: false,
+    initial: { x: undefined, y: undefined },
+    delta: { x: 0, y: 0 },
+  });
 
-  const pointerDown = useCallback((e) => {
-    e.preventDefault();
-    setDragging(true);
-    setCoordinates({ x: e.pageX, y: e.pageY });
+  const pointerCoordinates = (e) => (
+    e.changedTouches
+      ? { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY }
+      : { x: e.pageX, y: e.pageY }
+  );
+
+  const onDown = useCallback((e) => {
+    drag.current = { ...drag.current, active: true, initial: pointerCoordinates(e) };
     // Move the target to the end of the svg so that it sits on top of all other elements
     e.currentTarget.parentElement.append(e.currentTarget);
     onPointerDown?.(e);
   });
-  const pointerMove = useCallback((e) => {
-    e.preventDefault();
-    if (dragging) {
+  const onMove = useCallback((e) => {
+    if (drag.current.active) {
       const { a: scaleX, d: scaleY } = e.currentTarget.closest('svg').getScreenCTM();
-      setDeltaCoordinates({
-        x: (e.pageX - coordinates.x) / scaleX,
-        y: (e.pageY - coordinates.y) / scaleY,
-      });
+      const { x, y } = pointerCoordinates(e);
+      drag.current = {
+        ...drag.current,
+        delta: {
+          x: (x - drag.current.initial.x) / scaleX,
+          y: (y - drag.current.initial.y) / scaleY,
+        },
+      };
+      e.currentTarget.setAttribute('transform', `translate(${drag.current.delta.x},${drag.current.delta.y})`);
       onPointerMove?.(e);
     }
   });
 
-  const pointerUp = useCallback((e) => {
-    e.preventDefault();
-    setDragging(false);
-    if (dragging) {
-      setCoordinates({ x: undefined, y: undefined });
-      setDeltaCoordinates({ x: 0, y: 0 });
+  const onUp = useCallback((e) => {
+    if (drag.current.active) {
+      e.preventDefault();
+      drag.current = {
+        ...drag.current,
+        active: false,
+        initial: { x: undefined, y: undefined },
+        delta: { x: 0, y: 0 },
+      };
+      e.currentTarget.setAttribute('transform', `translate(${drag.current.delta.x},${drag.current.delta.y})`);
       if (dropZones) {
         const dropped = dropZones(e)
           .filter((dropZone) => (e.currentTarget !== dropZone))
@@ -53,7 +67,7 @@ const useDragSVG = ({
             const {
               top, bottom, left, right,
             } = dropZone.getBoundingClientRect();
-            const { pageX: x, pageY: y } = e;
+            const { x, y } = pointerCoordinates(e);
             return inRange(x, left, right) && inRange(y, top, bottom);
           });
         if (dropped) {
@@ -65,11 +79,14 @@ const useDragSVG = ({
   });
 
   return {
-    onPointerDown: pointerDown,
-    onPointerMove: pointerMove,
-    onPointerUp: pointerUp,
-    onPointerLeave: pointerUp,
-    transform: `translate(${deltaCoordinates.x},${deltaCoordinates.y})`,
+    onMouseDown: onDown,
+    onMouseMove: onMove,
+    onMouseUp: onUp,
+    onMouseLeave: onUp,
+    onTouchStart: onDown,
+    onTouchMove: onMove,
+    onTouchEnd: onUp,
+    onTouchCancel: onUp,
   };
 };
 
@@ -93,7 +110,7 @@ const WithMapEdit = (Component) => {
       <Component
         id={id}
         tile={tile}
-        className={classNames(className, 'cursor-move')}
+        className={classNames(className, 'cursor-move touch-none')}
         {...dragAndDrop}
         {...props}
       />
