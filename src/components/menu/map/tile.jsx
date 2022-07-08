@@ -5,14 +5,17 @@ import MenuItem from '../menu-item';
 
 function Tile() {
   const id = 'tile';
-  const [{ ui: { mode } }, dispatch] = useGameContext();
+  const [{ ui: { selected } }, dispatch] = useGameContext();
 
-  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: id });
+    if (selected.mode === id) {
+      dispatch({ type: 'deselect' });
+    } else {
+      dispatch({ type: 'select', payload: { id } });
+    }
   };
   return (
-    <MenuItem onClick={onClick} selected={selected}>
+    <MenuItem onClick={onClick} selected={id === selected.mode}>
       <Icon />
     </MenuItem>
   );

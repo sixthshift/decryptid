@@ -1,16 +1,24 @@
 const initialState = {
   radius: 30,
   spacing: 0.01,
+  selected: {},
 };
 
 // eslint-disable-next-line default-param-last
 export default (state = initialState, action) => {
-  if (['cube', 'disc', 'shack', 'stone', 'tile'].includes(action.type)) {
-    if (action.type === state.mode) {
-      return { ...state, mode: undefined };
-    }
-    return { ...state, mode: action.type };
+  if (action.type === 'select') {
+    return {
+      ...state,
+      selected: { mode: action.payload.id, colour: action.payload.colour },
+    };
   }
-
+  if (action.type === 'deselect') {
+    return {
+      ...state,
+      selected: {},
+    };
+  }
   return state;
 };
+
+export const getMode = (state) => (state.ui.selected.mode);

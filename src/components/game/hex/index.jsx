@@ -1,45 +1,21 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-multi-assign */
-import classNames from 'classnames';
 import React from 'react';
 import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
-import { hexToPixel, hexToPoints } from './utils';
+import Hex from './hex';
 import WithMapEdit from './withMapEdit';
-
-function Hex({ model, children }) {
-  const [{ ui: { radius, spacing } }] = useGameContext();
-  const pixel = hexToPixel(radius, spacing, model.coordinates);
-
-  const hex = (
-    <g transform={`translate(${pixel.x}, ${pixel.y})`}>
-      <polygon
-        className={classNames([`fill-${model.terrain}`, 'stroke-secondary', 'stroke-2'])}
-        points={hexToPoints(radius).map(({ q, r }) => (`${q}, ${r}`)).join(' ')}
-      />
-      {
-        model.territory
-          ? (
-            <polygon
-              className={classNames(['fill-transparent', `stroke-${model.territory}`, 'stroke-2'])}
-              points={hexToPoints(radius * 0.85).map(({ q, r }) => (`${q}, ${r}`)).join(' ')}
-            />
-          )
-          : null
-      }
-      {children}
-    </g>
-  );
-
-  return hex;
-}
+import WithPlacement from './withPlacement';
 
 function Index({ model, children }) {
   let Component = Hex;
-  const [{ ui: { mode } }] = useGameContext();
-  if (mode === 'tile') {
+  const [{ ui: { selected } }] = useGameContext();
+  if (selected.mode === 'tile') {
     Component = WithMapEdit(Component);
   }
-
+  if (['cube', 'disc', 'shack', 'stone'].includes(selected.mode) && selected.colour) {
+    Component = WithPlacement(Component);
+  }
   return (
     <Component model={model}>
       {children}
@@ -47,13 +23,13 @@ function Index({ model, children }) {
   );
 }
 
-export default Index;
-
-Index.propTypes = Hex.propTypes = {
+Index.propTypes = {
   model: modelPropType.isRequired,
   children: childrenPropType,
 };
 
-Index.defaultProps = Hex.defaultProps = {
+Index.defaultProps = {
   children: null,
 };
+
+export default Index;
