@@ -1,5 +1,4 @@
 import React from 'react';
-import config from '../../../config';
 import { useGameContext } from '../../context';
 import Icon from '../../icons/stone';
 import ColourMenu from '../colour-menu';
@@ -7,21 +6,24 @@ import MenuItem from '../menu-item';
 
 function Stone() {
   const id = 'stone';
-  const [{ ui: { mode } }, dispatch] = useGameContext();
+  const [{ game: { structures }, ui: { selected } }, dispatch] = useGameContext();
 
-  const selected = mode === id;
   const onClick = () => {
-    dispatch({ type: id });
+    if (selected.mode === id) {
+      dispatch({ type: 'deselect' });
+    } else {
+      dispatch({ type: 'select', payload: { id } });
+    }
   };
   return (
     <ColourMenu
       menuItem={(
-        <MenuItem onClick={onClick} selected={selected}>
+        <MenuItem onClick={onClick} selected={id === selected.mode}>
           <Icon />
         </MenuItem>
         )}
-      colours={config.players.map((player) => player.symbol)}
-      selected={selected}
+      id={id}
+      colours={structures.map((structure) => ([structure.colour, structure.stone]))}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { partition, zip } from 'lodash';
+import { partition, sortBy, zip } from 'lodash';
 
 export default (state, action) => {
   if (action.type === 'flip') {
@@ -11,7 +11,8 @@ export default (state, action) => {
         .map(([hex, coordinates]) => ({ ...hex, coordinates }))
         .reverse(),
     ];
-  } if (action.type === 'switch') {
+  }
+  if (action.type === 'switch') {
     const { idA, idB } = action.payload;
     const [tiles, hexes] = partition(state, (hex) => (hex.tile === idA || hex.tile === idB));
     const tileA = tiles.filter((hex) => hex.tile === idA);
@@ -25,5 +26,37 @@ export default (state, action) => {
         ])).flat(),
     ];
   }
+
+  if (action.type === 'place' || action.type === 'unplace') {
+    let entity;
+    if (action.payload.mode === 'cube' || action.payload.mode === 'disc') {
+      entity = 'hints';
+    } else if (action.payload.mode === 'shack' || action.payload.mode === 'stone') {
+      entity = 'structures';
+    }
+    return state.map((hex) => {
+      if (
+        hex.coordinates.q === action.payload.model.coordinates.q
+          && hex.coordinates.r === action.payload.model.coordinates.r
+          && hex.coordinates.s === action.payload.model.coordinates.s
+      ) {
+        let entities = [];
+        if (action.type === 'place') {
+          entities = sortBy([
+            ...hex[entity],
+            { type: action.payload.mode, colour: action.payload.colour },
+          ], JSON.stringify);
+        } else if (action.type === 'unplace') {
+          entities = sortBy(hex[entity].filter(
+            // eslint-disable-next-line max-len
+            (hint) => (!(hint.type === action.payload.mode && hint.colour === action.payload.colour)),
+          ), JSON.stringify);
+        }
+        return { ...hex, [entity]: entities };
+      }
+      return hex;
+    });
+  }
+
   return state;
 };

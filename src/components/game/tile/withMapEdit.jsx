@@ -7,10 +7,16 @@ import { useGameContext } from '../../context';
 import { classNamesPropType, modelPropType } from '../prop-types';
 
 const useDoubleClick = (onDoubleClick) => {
-  const [lastClick, setLastClick] = useState(Date.now());
+  const [lastClick, setLastClick] = useState(null);
   return () => {
-    if (Date.now() - lastClick < 500) onDoubleClick(); // within 0.5 seconds
-    setLastClick(Date.now());
+    if (!lastClick) {
+      setLastClick(Date.now());
+    } else if (Date.now() - lastClick < 500) {
+      // within 0.5 seconds
+      onDoubleClick();
+    } else {
+      setLastClick(Date.now());
+    }
   };
 };
 
