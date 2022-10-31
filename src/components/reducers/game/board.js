@@ -36,9 +36,9 @@ export default (state, action) => {
     }
     return state.map((hex) => {
       if (
-        hex.coordinates.q === action.payload.model.coordinates.q
-          && hex.coordinates.r === action.payload.model.coordinates.r
-          && hex.coordinates.s === action.payload.model.coordinates.s
+        hex.coordinates.q === action.payload.coordinates.q
+          && hex.coordinates.r === action.payload.coordinates.r
+          && hex.coordinates.s === action.payload.coordinates.s
       ) {
         let entities = [];
         if (action.type === 'place') {
@@ -48,7 +48,6 @@ export default (state, action) => {
           ], JSON.stringify);
         } else if (action.type === 'unplace') {
           entities = sortBy(hex[entity].filter(
-            // eslint-disable-next-line max-len
             (hint) => (!(hint.type === action.payload.mode && hint.colour === action.payload.colour)),
           ), JSON.stringify);
         }
