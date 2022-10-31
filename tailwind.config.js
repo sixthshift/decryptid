@@ -12,8 +12,8 @@ const colors = {
 const players = {
   alpha: '#fd0012',
   beta: '#089f7d',
-  gamma: '#e87501',
-  delta: '#8dbedb',
+  gamma: '#8dbedb',
+  delta: '#e87501',
   epsilon: '#9d3ed8',
 };
 
