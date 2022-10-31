@@ -100,9 +100,9 @@ export const isRuleValidForColour = (board, rule, colour) => {
      * To pass, this hex must:
      * (not contain a cube) AND (either contain a disc or nothing)
      */
-    const containsCube = hex.hints.some((hint) => (hint.type === 'cube' && hint.colour === colour));
-    const containsDisc = hex.hints.some((hint) => (hint.type === 'disc' && hint.colour === colour));
-    const containsNothing = !hex.hints.some((hint) => (hint.colour === colour));
+    const containsCube = hex.clues.some((clue) => (clue.type === 'cube' && clue.colour === colour));
+    const containsDisc = hex.clues.some((clue) => (clue.type === 'disc' && clue.colour === colour));
+    const containsNothing = !hex.clues.some((clue) => (clue.colour === colour));
     return !containsCube && (containsDisc || containsNothing);
   });
   const hexBeyondRuleSatisfies = hexesBeyondRule.every((hex) => {
@@ -110,9 +110,9 @@ export const isRuleValidForColour = (board, rule, colour) => {
      * To pass, this hex must:
      * (not contain a disc) AND (either contain a cube or nothing)
      */
-    const containsCube = hex.hints.some((hint) => (hint.type === 'cube' && hint.colour === colour));
-    const containsDisc = hex.hints.some((hint) => (hint.type === 'disc' && hint.colour === colour));
-    const containsNothing = !hex.hints.some((hint) => (hint.colour === colour));
+    const containsCube = hex.clues.some((clue) => (clue.type === 'cube' && clue.colour === colour));
+    const containsDisc = hex.clues.some((clue) => (clue.type === 'disc' && clue.colour === colour));
+    const containsNothing = !hex.clues.some((clue) => (clue.colour === colour));
 
     return !containsDisc && (containsCube || containsNothing);
   });
@@ -121,7 +121,7 @@ export const isRuleValidForColour = (board, rule, colour) => {
 };
 
 /**
- * For a player, generate a list of candidate rules based on their hints
+ * For a player, generate a list of candidate rules based on their clues
  * This is done by evaluating every rule and checking its validity
  * @param {*} board
  * @param {*} rules

@@ -11,8 +11,8 @@ function Tokens({ model }) {
     <g>
       {
         zip(
-          [...model.hints, ...model.structures],
-          toPoints(model.hints.length + model.structures.length, radius * 0.5),
+          [...model.clues, ...model.structures],
+          toPoints(model.clues.length + model.structures.length, radius * 0.5),
         ).map(([token, { x, y }]) => (<Token key={JSON.stringify(token)} token={token} transform={`translate(${x}, ${y})`} />))
       }
     </g>

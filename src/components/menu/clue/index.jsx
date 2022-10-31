@@ -4,7 +4,7 @@ import Cube from './cube';
 import Disc from './disc';
 import Solve from './solve';
 
-function Hint() {
+function Clue() {
   return (
     <Menu>
       <Cube />
@@ -14,4 +14,4 @@ function Hint() {
   );
 }
 
-export default Hint;
+export default Clue;

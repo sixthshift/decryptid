@@ -30,7 +30,7 @@ export default (state, action) => {
   if (action.type === 'place' || action.type === 'unplace') {
     let entity;
     if (action.payload.mode === 'cube' || action.payload.mode === 'disc') {
-      entity = 'hints';
+      entity = 'clues';
     } else if (action.payload.mode === 'shack' || action.payload.mode === 'stone') {
       entity = 'structures';
     }
@@ -48,7 +48,7 @@ export default (state, action) => {
           ], JSON.stringify);
         } else if (action.type === 'unplace') {
           entities = sortBy(hex[entity].filter(
-            (hint) => (!(hint.type === action.payload.mode && hint.colour === action.payload.colour)),
+            (clue) => (!(clue.type === action.payload.mode && clue.colour === action.payload.colour)),
           ), JSON.stringify);
         }
         return { ...hex, [entity]: entities };

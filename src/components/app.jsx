@@ -2,7 +2,7 @@ import React from 'react';
 import '../stylesheet.css';
 import { GameContextProvider } from './context';
 import Game from './game';
-import HintMenu from './menu/hint';
+import ClueMenu from './menu/clue';
 import MapMenu from './menu/map';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <GameContextProvider>
           <MapMenu />
           <Game />
-          <HintMenu />
+          <ClueMenu />
         </GameContextProvider>
       </div>
     </div>

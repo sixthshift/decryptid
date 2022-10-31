@@ -22,7 +22,7 @@ function Hex({
         points={toPoints(6, radius).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
       />
       {model.territory && <Territory model={model} />}
-      {!(isEmpty(model.hints) && isEmpty(model.structures)) && <Tokens model={model} />}
+      {!(isEmpty(model.clues) && isEmpty(model.structures)) && <Tokens model={model} />}
       {children}
     </g>
   );
