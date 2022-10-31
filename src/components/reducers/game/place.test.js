@@ -14,7 +14,7 @@ describe('place', () => {
 
     expect(received.board.find((hex) => (hex.coordinates.q === 0 && hex.coordinates.r === 0 && hex.coordinates.s === 0))).toEqual(
       {
-        anchor: true, tile: 0, coordinates: { q: 0, r: 0, s: 0 }, terrain: 'water', structures: [], hints: [{ type: 'cube', colour: 'alpha' }],
+        anchor: true, tile: 0, coordinates: { q: 0, r: 0, s: 0 }, terrain: 'water', structures: [], clues: [{ type: 'cube', colour: 'alpha' }],
       },
     );
   });

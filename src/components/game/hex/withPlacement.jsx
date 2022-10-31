@@ -4,9 +4,9 @@ import React from 'react';
 import { useGameContext } from '../../context';
 import { childrenPropType, classNamesPropType, modelPropType } from '../prop-types';
 
-const isHint = (mode) => (mode === 'cube' || mode === 'disc');
+const isClue = (mode) => (mode === 'cube' || mode === 'disc');
 const isStructure = (mode) => (mode === 'shack' || mode === 'stone');
-const isTokenOnHex = (hex, mode, colour) => (hex.hints.some((hint) => (hint.type === mode && hint.colour === colour)) || hex.structures.some((structure) => (structure.type === mode && structure.colour === colour))
+const isTokenOnHex = (hex, mode, colour) => (hex.clues.some((clue) => (clue.type === mode && clue.colour === colour)) || hex.structures.some((structure) => (structure.type === mode && structure.colour === colour))
 );
 const canPlace = (availableTokens, hex, mode, colour) => (
   availableTokens.find((token) => (token.colour === colour))[mode] > 0
@@ -22,7 +22,7 @@ const WithPlacement = (Component) => {
     const onClick = () => {
       // eslint-disable-next-line no-nested-ternary
       const tokens = isStructure(mode) ? game.structures
-        : isHint(mode) ? game.players
+        : isClue(mode) ? game.players
           : undefined;
       // eslint-disable-next-line no-nested-ternary
       const actionType = (tokens && canPlace(tokens, model, mode, colour)) ? 'place'

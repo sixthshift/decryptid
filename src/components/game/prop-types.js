@@ -10,7 +10,7 @@ export const modelPropType = PropTypes.shape({
   }),
   terrain: PropTypes.string,
   territory: PropTypes.string,
-  hints: PropTypes.arrayOf(PropTypes.shape({
+  clues: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string,
     colour: PropTypes.string,
   })),
