@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Solve() {
+function Invert() {
   return (
     <svg width="24" height="24" viewBox="0 0 6.35 6.35" fill="currentColor">
       <g
@@ -19,4 +19,4 @@ function Solve() {
   );
 }
 
-export default Solve;
+export default Invert;
