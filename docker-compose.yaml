@@ -15,6 +15,7 @@ services:
     entrypoint: sh -c
       "
       apk add git;
+      apk add openssh;
       yarn install;
       yarn serve;
       "
