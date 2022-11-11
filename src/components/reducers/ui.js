@@ -2,6 +2,7 @@ const initialState = {
   radius: 30,
   spacing: 0.01,
   selected: {},
+  inversion: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -16,6 +17,12 @@ export default (state = initialState, action) => {
     return {
       ...state,
       selected: {},
+    };
+  }
+  if (action.type === 'invert') {
+    return {
+      ...state,
+      inversion: !state.inversion,
     };
   }
   return state;
