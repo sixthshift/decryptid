@@ -2,7 +2,6 @@
 import {
   difference, times, union
 } from 'lodash';
-import ruleset from './rules';
 
 /**
  *
@@ -121,21 +120,23 @@ export const isRuleValidForColour = (board, rule, colour) => {
 };
 
 /**
- * For a player, generate a list of candidate rules based on their clues
- * This is done by evaluating every rule and checking its validity
+ * For a rule, determine which player supports or rejects this rule
  * @param {*} board
- * @param {*} rules
- * @param {*} player
- * @returns A list of candidate rules
+ * @param {*} players
+ * @param {*} rule
+ * @returns A new copy of the same rule with updated solutions
  */
-export const solveForPlayer = (board, rules, player) => rules.filter((rule) => isRuleValidForColour(board, rule, player.colour));
+export const solveForRule = (board, players, rule) => ({
+  ...rule,
+  solution: players.reduce((acc, player) => {
+    acc[player.colour] = isRuleValidForColour(board, rule, player.colour);
+    return acc;
+  }, {})
+});
 
 /**
- * For every player, generate their list of candidate rules
+ * Solves the game based on the provided state
  * @param {*} game
- * @returns An object containing each player's candidate rules
+ * @returns A ruleset with the solutions updated according to the provided state
  */
-export const solve = (game) => game.players.reduce((acc, player) => {
-  acc[player.colour] = solveForPlayer(game.board, ruleset, player);
-  return acc;
-}, {});
+export const solve = (game) => game.ruleset.map((rule) => solveForRule(game.board, game.players, rule));

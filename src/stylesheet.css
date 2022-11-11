@@ -23,17 +23,17 @@
 html,
 body,
 #root {
-	@apply h-full w-full;
+	@apply overflow-hidden h-full max-h-screen;
 	-webkit-tap-highlight-color: transparent;
 }
 
 .auto-rotate {
-	@apply flex landscape:flex-col portrait:flex-row;
+	@apply flex portrait:flex-row landscape:flex-col;
 }
 .auto-rotate-invert {
-	@apply flex landscape:flex-row portrait:flex-col;
+	@apply flex portrait:flex-col landscape:flex-row;
 }
 
 .menu > *{
-	@apply first:landscape:flex-col-reverse first:portrait:flex-row-reverse;
+	@apply first:portrait:flex-row-reverse first:landscape:flex-col-reverse;
 }

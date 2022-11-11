@@ -37,7 +37,7 @@ function Game() {
   const tiles = groupBy(board, (hex) => (hex.tile));
 
   return (
-    <div className="grow w-full h-full">
+    <div className="portrait:grow portrait:w-fit portrait:h-fit landscape:h-full">
       <svg
         width="100%"
         height="100%"

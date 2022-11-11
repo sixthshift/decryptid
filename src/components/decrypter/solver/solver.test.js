@@ -1,9 +1,9 @@
 import { negate, sortBy } from 'lodash';
 import {
-  evaluate, isRuleValidForColour, navigate, solve, solveForPlayer,
+  evaluate, isRuleValidForColour, navigate, solve,
 } from '.';
-import reducer from '../components/reducers';
-import rules from './rules';
+
+import reducer from '../../reducers';
 
 const byCoordinates = ({ q, r, s }) => (hex) => (
   hex.coordinates.q === q
@@ -437,122 +437,7 @@ describe('Solver', () => {
       expect(received).toBe(expected);
     });
   });
-  describe('Solve for map 1', () => {
-    beforeEach(() => {
-      const actions = [
-        { type: 'switch', payload: { idA: 0, idB: 1 } },
-        { type: 'switch', payload: { idA: 2, idB: 3 } },
-        { type: 'switch', payload: { idA: 2, idB: 4 } },
-        { type: 'flip', payload: 0 },
-        { type: 'flip', payload: 3 },
-        { type: 'flip', payload: 2 },
-        { type: 'flip', payload: 5 },
-        { type: 'place', payload: { mode: 'stone', colour: 'blue', coordinates: { q: 4, r: -1, s: -3 } } },
-        { type: 'place', payload: { mode: 'stone', colour: 'green', coordinates: { q: 1, r: 7, s: -8 } } },
-        { type: 'place', payload: { mode: 'stone', colour: 'white', coordinates: { q: 11, r: -2, s: -9 } } },
-        { type: 'place', payload: { mode: 'shack', colour: 'blue', coordinates: { q: 5, r: 5, s: -10 } } },
-        { type: 'place', payload: { mode: 'shack', colour: 'green', coordinates: { q: 10, r: -2, s: -8 } } },
-        { type: 'place', payload: { mode: 'shack', colour: 'white', coordinates: { q: 7, r: -1, s: -6 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-    });
-    it('should solve for player alpha correctly', () => {
-      // on desert or mountain
-      const actions = [
-        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 5, r: -1, s: -4 } } },
-        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 4, r: 0, s: -4 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 6, r: -2, s: -4 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 8, r: -2, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 6, r: 0, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 4, r: 5, s: -9 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-      const { game: { board, players: [player] } } = state;
-      const received = solveForPlayer(board, rules, player);
-      expect(received).toEqual([
-        {
-          within: 0, type: 'terrain', value: ['desert', 'mountain'], text: 'On desert or mountain', inverted: false,
-        },
-      ]);
-    });
-    it('should solve for player beta correctly', () => {
-      // within one space of desert
-      const actions = [
-        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 8, r: 0, s: -8 } } },
-        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 3, r: 3, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 10, r: -1, s: -9 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 7, r: -1, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 1, r: 1, s: -2 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 9, r: 2, s: -11 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-      const { game: { board, players: [, player] } } = state;
-      const received = solveForPlayer(board, rules, player);
-      expect(received).toEqual([
-        {
-          within: 1, type: 'terrain', value: ['desert'], text: 'Within 1 space of desert', inverted: false,
-        },
-      ]);
-    });
-    it('should solve for player gamma correctly', () => {
-      // on water or mountain
-      const actions = [
-        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 9, r: 1, s: -10 } } },
-        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 3, r: 4, s: -7 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 10, r: -4, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 4, r: 1, s: -5 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 11, r: 3, s: -14 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 0, r: 3, s: -3 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-      const { game: { board, players: [,, player] } } = state;
-      const received = solveForPlayer(board, rules, player);
-      expect(received).toEqual([
-        {
-          within: 0, type: 'terrain', value: ['water', 'mountain'], text: 'On water or mountain', inverted: false,
-        },
-      ]);
-    });
-    it('should solve for player delta correctly', () => {
-      // within one space of water
-      const actions = [
-        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 7, r: 3, s: -10 } } },
-        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 2, r: 4, s: -6 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 2, r: 1, s: -3 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 6, r: -1, s: -5 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 5, r: 5, s: -10 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 11, r: 3, s: -14 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-      const { game: { board, players: [,,, player] } } = state;
-      const received = solveForPlayer(board, rules, player);
-      expect(received).toEqual([
-        {
-          within: 1, type: 'terrain', value: ['water'], text: 'Within 1 space of water', inverted: false,
-        },
-      ]);
-    });
-    it('should solve for player epsilon correctly', () => {
-      // within one space of either animal territory
-      const actions = [
-        { type: 'place', payload: { mode: 'disc', colour: 'epsilon', coordinates: { q: 11, r: 1, s: -12 } } },
-        { type: 'place', payload: { mode: 'disc', colour: 'epsilon', coordinates: { q: 4, r: 5, s: -9 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 9, r: 2, s: -11 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 5, r: -1, s: -4 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 7, r: 5, s: -12 } } },
-        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 2, r: 5, s: -7 } } },
-      ];
-      state = actions.reduce((acc, action) => reducer(acc, action), state);
-      const { game: { board, players: [,,,, player] } } = state;
-      const received = solveForPlayer(board, rules, player);
-      expect(received).toEqual([
-        {
-          within: 1, type: 'territory', value: ['bear', 'cougar'], text: 'Within 1 space of either animal territory', inverted: false,
-        },
-      ]);
-    });
-  });
-  describe('Solve for map 2', () => {
+  describe('Solve for game', () => {
     it('should solve for all players', () => {
       /**
        * alpha: within two spaces of bear territory
@@ -669,23 +554,488 @@ describe('Solver', () => {
       state = actions.reduce((acc, action) => reducer(acc, action), state);
       const { game } = state;
       const received = solve(game);
-      expect(received).toEqual({
-        alpha: [{
-          within: 2, type: 'territory', value: ['bear'], text: 'Within 2 spaces of bear territory', inverted: false,
-        }],
-        beta: [{
-          within: 0, type: 'terrain', value: ['water', 'mountain'], text: 'On water or mountain', inverted: false,
-        }],
-        gamma: [{
-          within: 1, type: 'terrain', value: ['desert'], text: 'Not within 1 space of desert', inverted: true,
-        }],
-        delta: [{
-          within: 3, type: 'colour', value: ['white'], text: 'Within 3 spaces of a white structure', inverted: false,
-        }],
-        epsilon: [{
-          within: 2, type: 'structure', value: ['stone'], text: 'Not within 2 spaces of a standing stone', inverted: true,
-        }],
-      });
+      expect(received).toEqual([
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'desert'],
+          text: 'On forest/desert',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'water'],
+          text: 'On forest/water',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'swamp'],
+          text: 'On forest/swamp',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'mountain'],
+          text: 'On forest/mountain',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'water'],
+          text: 'On desert/water',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'swamp'],
+          text: 'On desert/swamp',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'mountain'],
+          text: 'On desert/mountain',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['water', 'swamp'],
+          text: 'On water/swamp',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['water', 'mountain'],
+          text: 'On water/mountain',
+          inverted: false,
+          solution: {
+            alpha: false, beta: true, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['swamp', 'mountain'],
+          text: 'On swamp/mountain',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['forest'],
+          text: 'Within 1 of forest',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['desert'],
+          text: 'Within 1 of desert',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['swamp'],
+          text: 'Within 1 of swamp',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['mountain'],
+          text: 'Within 1 of mountain',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['water'],
+          text: 'Within 1 of water',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'territory',
+          value: ['bear', 'cougar'],
+          text: 'Within 1 of bear/cougar',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'structure',
+          value: ['stone'],
+          text: 'Within 2 of stone',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'structure',
+          value: ['shack'],
+          text: 'Within 2 of shack',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'territory',
+          value: ['bear'],
+          text: 'Within 2 of bear',
+          inverted: false,
+          solution: {
+            alpha: true, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'territory',
+          value: ['cougar'],
+          text: 'Within 2 of cougar',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['blue'],
+          text: 'Within 3 of blue',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['white'],
+          text: 'Within 3 of white',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: true, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['green'],
+          text: 'Within 3 of green',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['black'],
+          text: 'Within 3 of black',
+          inverted: false,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'desert'],
+          text: 'Not on forest/desert',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'water'],
+          text: 'Not on forest/water',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'swamp'],
+          text: 'Not on forest/swamp',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['forest', 'mountain'],
+          text: 'Not on forest/mountain',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'water'],
+          text: 'Not on desert/water',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'swamp'],
+          text: 'Not on desert/swamp',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['desert', 'mountain'],
+          text: 'Not on desert/mountain',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['water', 'swamp'],
+          text: 'Not on water/swamp',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['water', 'mountain'],
+          text: 'Not on water/mountain',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 0,
+          type: 'terrain',
+          value: ['swamp', 'mountain'],
+          text: 'Not on swamp/mountain',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['forest'],
+          text: 'Not within 1 of forest',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['desert'],
+          text: 'Not within 1 of desert',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: true, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['swamp'],
+          text: 'Not within 1 of swamp',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['mountain'],
+          text: 'Not within 1 of mountain',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'terrain',
+          value: ['water'],
+          text: 'Not within 1 of water',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 1,
+          type: 'territory',
+          value: ['bear', 'cougar'],
+          text: 'Not within 1 of bear/cougar',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'structure',
+          value: ['stone'],
+          text: 'Not within 2 of stone',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: true,
+          },
+        },
+        {
+          within: 2,
+          type: 'structure',
+          value: ['shack'],
+          text: 'Not within 2 of shack',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'territory',
+          value: ['bear'],
+          text: 'Not within 2 of bear',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 2,
+          type: 'territory',
+          value: ['cougar'],
+          text: 'Not within 2 of cougar',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['blue'],
+          text: 'Not within 3 of blue',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['white'],
+          text: 'Not within 3 of white',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['green'],
+          text: 'Not within 3 of green',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+        {
+          within: 3,
+          type: 'colour',
+          value: ['black'],
+          text: 'Not within 3 of black',
+          inverted: true,
+          solution: {
+            alpha: false, beta: false, gamma: false, delta: false, epsilon: false,
+          },
+        },
+      ]);
     });
   });
 });
