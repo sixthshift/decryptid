@@ -28,6 +28,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Decryptid',
+      favicon: './src/favicon.ico',
       meta: {
         viewport: {
           name: 'viewport',
