@@ -21,7 +21,11 @@ MenuItem.propTypes = {
     PropTypes.node,
   ]).isRequired,
   onClick: PropTypes.func,
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.bool,
+};
+
+MenuItem.defaultProps = {
+  selected: false,
 };
 
 MenuItem.defaultProps = {
