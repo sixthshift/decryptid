@@ -128,10 +128,12 @@ export const isRuleValidForColour = (board, rule, colour) => {
  */
 export const solveForRule = (board, players, rule) => ({
   ...rule,
-  solution: players.reduce((acc, player) => {
-    acc[player.colour] = isRuleValidForColour(board, rule, player.colour);
-    return acc;
-  }, {})
+  solution: players
+    .filter((player) => board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour))) // Don't solve for players who are not playing
+    .reduce((acc, player) => {
+      acc[player.colour] = isRuleValidForColour(board, rule, player.colour);
+      return acc;
+    }, {})
 });
 
 /**
