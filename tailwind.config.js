@@ -5,8 +5,9 @@ const product = (prefixes, suffixes) => prefixes
   .map((tuple) => (tuple.join('-')));
 
 const colors = {
-  primary: '#53281a',
-  secondary: '#fdefd2',
+  primary: '#464b2d',
+  secondary: '#dedeca',
+  tertiary: '#c4844c',
 };
 
 const players = {
