@@ -1,6 +1,7 @@
 import { groupBy } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGameContext } from '../context';
+import { decrypt } from '../decrypter/solver';
 import Tile from './tile';
 
 const toDimensions = (model, radius, spacing) => {
@@ -32,9 +33,15 @@ const toDimensions = (model, radius, spacing) => {
 };
 
 function Game() {
-  const [{ game: { board }, ui: { radius, spacing } }] = useGameContext();
+  const [{ game, game: { board, ruleset }, ui: { radius, spacing } }, dispatch] = useGameContext();
   const dimensions = toDimensions(board, radius, spacing);
   const tiles = groupBy(board, (hex) => (hex.tile));
+  useEffect(() => {
+    dispatch({
+      type: 'decrypt',
+      payload: decrypt(game),
+    });
+  }, [JSON.stringify(ruleset)]);
 
   return (
     <div className="portrait:grow portrait:w-fit portrait:h-fit landscape:h-full">

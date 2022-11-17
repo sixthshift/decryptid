@@ -4,6 +4,7 @@ import React from 'react';
 import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
 import Hex from './hex';
+import WithDecryption from './withDecryption';
 import WithMapEdit from './withMapEdit';
 import WithPlacement from './withPlacement';
 
@@ -15,6 +16,9 @@ function Index({ model, children }) {
   }
   if (['cube', 'disc', 'shack', 'stone'].includes(selected.mode) && selected.colour) {
     Component = WithPlacement(Component);
+  }
+  if (model.isCandidate) {
+    Component = WithDecryption(Component);
   }
   return (
     <Component model={model}>

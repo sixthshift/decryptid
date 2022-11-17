@@ -20,6 +20,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -27,6 +28,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -34,6 +36,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -41,6 +44,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -48,6 +52,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -55,6 +60,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -62,6 +68,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -69,6 +76,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -76,6 +84,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -83,6 +92,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -90,6 +100,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -98,6 +109,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -105,6 +117,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -112,6 +125,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -120,6 +134,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -127,6 +142,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -134,6 +150,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 0,
@@ -142,6 +159,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       anchor: true,
@@ -151,6 +169,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -158,6 +177,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -165,6 +185,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -173,6 +194,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -180,6 +202,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -187,6 +210,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -195,6 +219,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -202,6 +227,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -209,6 +235,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -216,6 +243,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -223,6 +251,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -230,6 +259,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -237,6 +267,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -244,6 +275,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -251,6 +283,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -258,6 +291,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -265,6 +299,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 1,
@@ -272,6 +307,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       anchor: true,
@@ -280,6 +316,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -288,6 +325,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -296,6 +334,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -303,6 +342,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -311,6 +351,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -318,6 +359,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -325,6 +367,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -332,6 +375,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -339,6 +383,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -346,6 +391,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -353,6 +399,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -360,6 +407,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -367,6 +415,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -374,6 +423,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -381,6 +431,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -388,6 +439,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -395,6 +447,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 2,
@@ -402,6 +455,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       anchor: true,
@@ -410,6 +464,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -417,6 +472,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -424,6 +480,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -431,6 +488,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -438,6 +496,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -445,6 +504,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -452,6 +512,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -459,6 +520,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -466,6 +528,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -473,6 +536,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -480,6 +544,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -487,6 +552,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -494,6 +560,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -501,6 +568,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -508,6 +576,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -515,6 +584,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -523,6 +593,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 3,
@@ -531,6 +602,7 @@ export default {
       territory: 'cougar',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       anchor: true,
@@ -539,6 +611,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -546,6 +619,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -553,6 +627,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -560,6 +635,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -567,6 +643,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -574,6 +651,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -581,6 +659,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -588,6 +667,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -595,6 +675,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -602,6 +683,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -609,6 +691,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -616,6 +699,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -623,6 +707,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -630,6 +715,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -638,6 +724,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -645,6 +732,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -653,6 +741,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 4,
@@ -661,6 +750,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       anchor: true,
@@ -670,6 +760,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -678,6 +769,7 @@ export default {
       territory: 'bear',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -685,6 +777,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -692,6 +785,7 @@ export default {
       terrain: 'desert',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -699,6 +793,7 @@ export default {
       terrain: 'mountain',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -706,6 +801,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -713,6 +809,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -720,6 +817,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -727,6 +825,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -734,6 +833,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -741,6 +841,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -748,6 +849,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -755,6 +857,7 @@ export default {
       terrain: 'swamp',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -762,6 +865,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -769,6 +873,7 @@ export default {
       terrain: 'water',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -776,6 +881,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -783,6 +889,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
     {
       tile: 5,
@@ -790,6 +897,7 @@ export default {
       terrain: 'forest',
       structures: [],
       clues: [],
+      isCandidate: false,
     },
   ],
   ruleset: [

@@ -1,5 +1,6 @@
 import { negate, sortBy } from 'lodash';
 import {
+  decrypt,
   evaluate, isRuleValidForColour, navigate, solve,
 } from '.';
 
@@ -437,8 +438,8 @@ describe('Solver', () => {
       expect(received).toBe(expected);
     });
   });
-  describe('Solve for game', () => {
-    it('should solve for all players', () => {
+  describe('Solve', () => {
+    it('should solve and return the correct rules', () => {
       /**
        * alpha: within two spaces of bear territory
        * beta: on water or mountains
@@ -1036,6 +1037,34 @@ describe('Solver', () => {
           },
         },
       ]);
+    });
+  });
+  describe('Decrypt', () => {
+    it('should decrypt and return the correct hexes', () => {
+      const actions = [
+        { type: 'place', payload: { mode: 'stone', colour: 'blue', coordinates: { q: 3, r: 1, s: -4 } } },
+        { type: 'place', payload: { mode: 'shack', colour: 'blue', coordinates: { q: 11, r: 3, s: -14 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 1, r: 2, s: -3 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 3, r: -1, s: -2 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 5, r: 0, s: -5 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 3, r: 3, s: -6 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 9, r: -1, s: -8 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 6, r: 0, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 2, r: 3, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 2, r: 5, s: -7 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 2, r: 6, s: -8 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 9, r: 0, s: -9 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 8, r: 1, s: -9 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 9, r: 1, s: -10 } } },
+      ];
+      state = actions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      const { game } = state;
+      const received = decrypt(game);
+      const expected = [
+        { q: 3, r: 3, s: -6 },
+      ];
+      expect(received).toEqual(expected);
     });
   });
 });

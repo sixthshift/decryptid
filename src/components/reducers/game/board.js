@@ -57,5 +57,20 @@ export default (state, action) => {
     });
   }
 
+  if (action.type === 'decrypt') {
+    return state.map((hex) => {
+      if (action.payload.includes(hex.coordinates)) {
+        return {
+          ...hex,
+          isCandidate: true,
+        };
+      }
+      return {
+        ...hex,
+        isCandidate: false,
+      };
+    });
+  }
+
   return state;
 };

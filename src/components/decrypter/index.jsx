@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { useGameContext } from '../context';
+import { solve } from './solver';
 
 function Decrypter() {
-  const [{ game, ui: { inversion } }, dispatch] = useGameContext();
+  const [{ game, game: { board, ruleset }, ui: { inversion } }, dispatch] = useGameContext();
   useEffect(() => {
-    dispatch({ type: 'solve', payload: game });
-  }, [game.board]);
+    dispatch({
+      type: 'solve',
+      payload: solve(game),
+    });
+  }, [board]);
 
   return (
     <div className="flex flex-wrap landscape:grow justify-center landscape:w-min">
-      {game.ruleset
+      {ruleset
         .filter((rule) => (rule.inverted ? inversion : true))
         .map((rule) => (
           <div className="space-x-1 w-56 text-xs whitespace-nowrap" key={rule.text}>
