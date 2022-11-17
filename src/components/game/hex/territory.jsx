@@ -9,7 +9,7 @@ function Territory({ model }) {
   return (
     <polygon
       className={classNames(['fill-transparent', `stroke-${model.territory}`, 'stroke-2'])}
-      points={toPoints(6, radius * 0.85).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
+      points={toPoints(6, radius * 0.8).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
     />
   );
 }

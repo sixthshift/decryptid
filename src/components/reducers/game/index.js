@@ -8,10 +8,7 @@ const initialState = {
   ...config,
   ruleset: config.ruleset.map((rule) => ({
     ...rule,
-    solution: config.players.reduce((acc, player) => {
-      acc[player.colour] = true;
-      return acc;
-    }, {}),
+    solution: {},
   })),
 };
 

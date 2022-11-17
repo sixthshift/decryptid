@@ -14,10 +14,10 @@ function Tokens({ model }) {
       return [{ x: 0, y: 0 }];
     } if (tokens.length === 2) {
       // If there are 2 tokens, then put them side by side without any in the middle
-      return toPoints(tokens.length, radius * 0.6);
+      return toPoints(tokens.length, radius * 0.5);
     }
     // For all else, place one in the middle, and the rest in a circle around it
-    return [{ x: 0, y: 0 }, ...toPoints(tokens.length - 1, radius * 0.6)];
+    return [{ x: 0, y: 0 }, ...toPoints(tokens.length - 1, radius * 0.5)];
   })();
   return (
     <g>
