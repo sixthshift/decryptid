@@ -1,7 +1,7 @@
 {
 	"name": "decryptid",
-	"version": "1.0.1",
-	"description": "A solver for Cryptid",
+	"version": "1.0.2",
+	"description": "A decrypter for Cryptid",
 	"main": "index.js",
 	"repository": "https://github.com/sixthshift/decryptid.git",
 	"author": "Jason Huang <sixth.shifts@gmail.com>",
