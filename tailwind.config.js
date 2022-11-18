@@ -7,7 +7,8 @@ const product = (prefixes, suffixes) => prefixes
 const colors = {
   primary: '#464b2d',
   secondary: '#dedeca',
-  tertiary: '#c4844c',
+  tertiary: '#d0d0b4',
+  accent: '#c4844c',
 };
 
 const players = {
