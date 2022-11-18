@@ -12,7 +12,7 @@ function Decrypter() {
   }, [board]);
 
   return (
-    <div className="flex flex-wrap landscape:grow justify-center landscape:w-min">
+    <div className="flex flex-wrap landscape:grow justify-center p-4 landscape:w-min bg-tertiary rounded-lg">
       {ruleset
         .filter((rule) => (rule.inverted ? inversion : true))
         .map((rule) => (

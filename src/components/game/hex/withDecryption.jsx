@@ -8,7 +8,7 @@ function Candidate() {
   const [{ ui: { radius } }] = useGameContext();
   return (
     <polygon
-      className={classNames(['fill-transparent', 'stroke-tertiary', 'stroke-2'])}
+      className={classNames(['fill-transparent', 'stroke-accent', 'stroke-2'])}
       points={toPoints(6, radius * 0.95).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
     />
   );
