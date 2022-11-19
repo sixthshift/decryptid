@@ -11,7 +11,7 @@ function Decrypter() {
       type: 'solve',
       payload: solve(game),
     });
-  }, [board]);
+  }, [board, inversion]);
 
   const [visible, setVisible] = useState(false);
   const toggleVisibility = () => { setVisible(!visible); };

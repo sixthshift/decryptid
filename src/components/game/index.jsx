@@ -33,15 +33,15 @@ const toDimensions = (model, radius, spacing) => {
 };
 
 function Game() {
-  const [{ game, game: { board, ruleset }, ui: { radius, spacing } }, dispatch] = useGameContext();
+  const [{ game, game: { board, ruleset }, ui: { radius, spacing, inversion } }, dispatch] = useGameContext();
   const dimensions = toDimensions(board, radius, spacing);
   const tiles = groupBy(board, (hex) => (hex.tile));
   useEffect(() => {
     dispatch({
       type: 'decrypt',
-      payload: decrypt(game),
+      payload: decrypt(game, inversion),
     });
-  }, [JSON.stringify(ruleset)]);
+  }, [JSON.stringify(ruleset), inversion]);
 
   return (
     <div className="portrait:grow portrait:w-fit portrait:h-fit landscape:h-full">
