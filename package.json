@@ -1,6 +1,6 @@
 {
 	"name": "decryptid",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "A decrypter for Cryptid",
 	"main": "index.js",
 	"repository": "https://github.com/sixthshift/decryptid.git",
