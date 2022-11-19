@@ -1060,10 +1060,121 @@ describe('Solver', () => {
       state = actions.reduce((acc, action) => reducer(acc, action), state);
       state = reducer(state, { type: 'solve', payload: solve(state.game) });
       const { game } = state;
-      const received = decrypt(game);
+      const received = decrypt(game, false);
       const expected = [
         { q: 3, r: 3, s: -6 },
       ];
+      expect(received).toEqual(expected);
+    });
+    it('should decrypt and return the correct hexes (with inverted)', () => {
+      let received;
+      let expected;
+
+      const setupActions = [
+        { type: 'switch', payload: { idA: 4, idB: 0 } },
+        { type: 'flip', payload: 4 },
+        { type: 'switch', payload: { idA: 3, idB: 1 } },
+        { type: 'switch', payload: { idA: 0, idB: 1 } },
+        { type: 'flip', payload: 5 },
+        { type: 'place', payload: { mode: 'stone', colour: 'black', coordinates: { q: 7, r: 4, s: -11 } } },
+        { type: 'place', payload: { mode: 'stone', colour: 'white', coordinates: { q: 2, r: 0, s: -2 } } },
+        { type: 'place', payload: { mode: 'stone', colour: 'green', coordinates: { q: 6, r: 2, s: -8 } } },
+        { type: 'place', payload: { mode: 'stone', colour: 'blue', coordinates: { q: 9, r: 4, s: -13 } } },
+        { type: 'place', payload: { mode: 'shack', colour: 'black', coordinates: { q: 0, r: 3, s: -3 } } },
+        { type: 'place', payload: { mode: 'shack', colour: 'white', coordinates: { q: 3, r: 6, s: -9 } } },
+        { type: 'place', payload: { mode: 'shack', colour: 'green', coordinates: { q: 7, r: 1, s: -8 } } },
+        { type: 'place', payload: { mode: 'shack', colour: 'blue', coordinates: { q: 6, r: 1, s: -7 } } },
+      ];
+      state = setupActions.reduce((acc, action) => reducer(acc, action), state);
+
+      const alphaActions = [
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 5, r: 4, s: -9 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 11, r: 0, s: -11 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'alpha', coordinates: { q: 2, r: -1, s: -1 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 0, r: 8, s: -8 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 1, r: 7, s: -8 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 0, r: 7, s: -7 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 0, r: 4, s: -4 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 3, r: 3, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 11, r: -5, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'alpha', coordinates: { q: 1, r: 6, s: -7 } } },
+      ];
+      state = alphaActions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      received = decrypt(state.game, true);
+      expected = [{ q: 4, r: 1, s: -5 }, { q: 4, r: 2, s: -6 }, { q: 5, r: 1, s: -6 }, { q: 5, r: 2, s: -7 }, { q: 5, r: 3, s: -8 }, { q: 0, r: 0, s: 0 }, { q: 0, r: 1, s: -1 }, { q: 1, r: 0, s: -1 }, { q: 1, r: 1, s: -2 }, { q: 2, r: -1, s: -1 }, { q: 2, r: 0, s: -2 }, { q: 2, r: 1, s: -3 }, { q: 3, r: -1, s: -2 }, { q: 3, r: 0, s: -3 }, { q: 3, r: 1, s: -4 }, { q: 4, r: -2, s: -2 }, { q: 4, r: -1, s: -3 }, { q: 4, r: 0, s: -4 }, { q: 5, r: -2, s: -3 }, { q: 5, r: -1, s: -4 }, { q: 5, r: 0, s: -5 }, { q: 6, r: -3, s: -3 }, { q: 6, r: -2, s: -4 }, { q: 6, r: -1, s: -5 }, { q: 7, r: -3, s: -4 }, { q: 7, r: -2, s: -5 }, { q: 7, r: -1, s: -6 }, { q: 8, r: -4, s: -4 }, { q: 8, r: -3, s: -5 }, { q: 8, r: -2, s: -6 }, { q: 6, r: 0, s: -6 }, { q: 6, r: 1, s: -7 }, { q: 6, r: 2, s: -8 }, { q: 7, r: 0, s: -7 }, { q: 7, r: 1, s: -8 }, { q: 7, r: 2, s: -9 }, { q: 8, r: -1, s: -7 }, { q: 8, r: 0, s: -8 }, { q: 8, r: 1, s: -9 }, { q: 9, r: 0, s: -9 }, { q: 9, r: 1, s: -10 }, { q: 3, r: 7, s: -10 }, { q: 10, r: 0, s: -10 }, { q: 4, r: 6, s: -10 }, { q: 5, r: 4, s: -9 }, { q: 5, r: 5, s: -10 }, { q: 11, r: 0, s: -11 }, { q: 5, r: 6, s: -11 }, { q: 6, r: 3, s: -9 }, { q: 6, r: 4, s: -10 }, { q: 6, r: 5, s: -11 }, { q: 7, r: 3, s: -10 }, { q: 7, r: 4, s: -11 }, { q: 7, r: 5, s: -12 }, { q: 8, r: 2, s: -10 }, { q: 8, r: 3, s: -11 }, { q: 8, r: 4, s: -12 }, { q: 9, r: 2, s: -11 }, { q: 9, r: 3, s: -12 }, { q: 9, r: 4, s: -13 }, { q: 10, r: 1, s: -11 }, { q: 10, r: 2, s: -12 }, { q: 10, r: 3, s: -13 }, { q: 11, r: 1, s: -12 }, { q: 11, r: 2, s: -13 }, { q: 11, r: 3, s: -14 }];
+      expect(received).toEqual(expected);
+
+      const betaActions = [
+        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 4, r: 3, s: -7 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 5, r: 0, s: -5 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'beta', coordinates: { q: 2, r: -1, s: -1 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 6, r: -3, s: -3 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 7, r: -3, s: -4 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 7, r: -2, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 6, r: -1, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 9, r: 2, s: -11 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'beta', coordinates: { q: 11, r: 0, s: -11 } } },
+      ];
+      state = betaActions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      received = decrypt(state.game, true);
+      expected = [{ q: 4, r: 1, s: -5 }, { q: 5, r: 3, s: -8 }, { q: 0, r: 0, s: 0 }, { q: 0, r: 1, s: -1 }, { q: 1, r: 0, s: -1 }, { q: 1, r: 1, s: -2 }, { q: 2, r: -1, s: -1 }, { q: 2, r: 0, s: -2 }, { q: 2, r: 1, s: -3 }, { q: 3, r: -1, s: -2 }, { q: 3, r: 0, s: -3 }, { q: 3, r: 1, s: -4 }, { q: 4, r: -2, s: -2 }, { q: 4, r: -1, s: -3 }, { q: 4, r: 0, s: -4 }, { q: 5, r: -2, s: -3 }, { q: 5, r: -1, s: -4 }, { q: 5, r: 0, s: -5 }, { q: 3, r: 7, s: -10 }, { q: 4, r: 6, s: -10 }, { q: 5, r: 4, s: -9 }, { q: 5, r: 5, s: -10 }, { q: 5, r: 6, s: -11 }, { q: 6, r: 3, s: -9 }, { q: 6, r: 4, s: -10 }, { q: 6, r: 5, s: -11 }];
+      expect(received).toEqual(expected);
+
+      const gammaActions = [
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 6, r: 3, s: -9 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 4, r: 1, s: -5 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 10, r: -3, s: -7 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 7, r: -1, s: -6 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'gamma', coordinates: { q: 10, r: 0, s: -10 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 2, r: -1, s: -1 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 8, r: -4, s: -4 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 9, r: -4, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 10, r: -5, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 10, r: -4, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'gamma', coordinates: { q: 9, r: -3, s: -6 } } },
+      ];
+      state = gammaActions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      received = decrypt(state.game, true);
+      expected = [{ q: 4, r: 1, s: -5 }, { q: 3, r: 0, s: -3 }, { q: 3, r: 1, s: -4 }, { q: 4, r: -2, s: -2 }, { q: 4, r: -1, s: -3 }, { q: 4, r: 0, s: -4 }, { q: 5, r: -2, s: -3 }, { q: 5, r: -1, s: -4 }, { q: 5, r: 0, s: -5 }, { q: 5, r: 4, s: -9 }, { q: 5, r: 5, s: -10 }, { q: 5, r: 6, s: -11 }, { q: 6, r: 3, s: -9 }, { q: 6, r: 4, s: -10 }, { q: 6, r: 5, s: -11 }];
+      expect(received).toEqual(expected);
+
+      const deltaActions = [
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 2, r: -1, s: -1 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 11, r: -4, s: -7 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 4, r: 2, s: -6 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 8, r: 0, s: -8 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 3, r: 5, s: -8 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'delta', coordinates: { q: 11, r: 2, s: -13 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 0, r: 0, s: 0 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 1, r: 0, s: -1 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 3, r: 0, s: -3 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 3, r: 1, s: -4 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 2, r: 4, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'delta', coordinates: { q: 8, r: 3, s: -11 } } },
+      ];
+      state = deltaActions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      received = decrypt(state.game, true);
+      expected = [{ q: 4, r: 1, s: -5 }, { q: 4, r: -2, s: -2 }, { q: 4, r: -1, s: -3 }, { q: 4, r: 0, s: -4 }, { q: 5, r: -2, s: -3 }, { q: 5, r: -1, s: -4 }, { q: 5, r: 0, s: -5 }];
+      expect(received).toEqual(expected);
+
+      const epsilonActions = [
+        { type: 'place', payload: { mode: 'disc', colour: 'epsilon', coordinates: { q: 10, r: 1, s: -11 } } },
+        { type: 'place', payload: { mode: 'disc', colour: 'epsilon', coordinates: { q: 4, r: 5, s: -9 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 1, r: 5, s: -6 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 3, r: 2, s: -5 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 4, r: -1, s: -3 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 5, r: -2, s: -3 } } },
+        { type: 'place', payload: { mode: 'cube', colour: 'epsilon', coordinates: { q: 8, r: 1, s: -9 } } },
+      ];
+      state = epsilonActions.reduce((acc, action) => reducer(acc, action), state);
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      state = reducer(state, { type: 'solve', payload: solve(state.game) });
+      received = decrypt(state.game, true);
+      expected = [{ q: 4, r: -2, s: -2 }];
       expect(received).toEqual(expected);
     });
   });

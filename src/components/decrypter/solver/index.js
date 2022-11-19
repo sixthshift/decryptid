@@ -143,10 +143,10 @@ export const solveForRule = (board, players, rule) => ({
  */
 export const solve = ({ board, players, ruleset }) => ruleset.map((rule) => solveForRule(board, players, rule));
 
-export const decrypt = ({ board, players, ruleset }) => intersectionWith(...players
+export const decrypt = ({ board, players, ruleset }, inversion) => intersectionWith(...players
   .filter((player) => board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour)))
   .map((player) => ruleset
-    .filter((rule) => !rule.inverted)
+    .filter((rule) => (rule.inverted ? inversion : true))
     .filter((rule) => !!rule.solution[player.colour])
     .map((rule) => {
       const [candidateHexes] = evaluate(board, rule);
