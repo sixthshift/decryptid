@@ -8,7 +8,7 @@ const colors = {
   primary: '#464b2d',
   secondary: '#dedeca',
   tertiary: '#d0d0b4',
-  accent: '#996333',
+  accent: '#dc4d01',
 };
 
 const players = {
@@ -49,6 +49,19 @@ module.exports = {
       ...structures,
       ...terrains,
       ...territories,
+    },
+    animation: {
+      pulse: "pulse 2s linear infinite"
+    },
+    keyframes: {
+      pulse: {
+        '0%, 100%': {
+          opacity: '0'
+        },
+        '10%': {
+          opacity: '1',
+        },
+      }
     },
   },
   safelist: [
