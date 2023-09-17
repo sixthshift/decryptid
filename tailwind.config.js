@@ -8,7 +8,7 @@ const colors = {
   primary: '#464b2d',
   secondary: '#dedeca',
   tertiary: '#d0d0b4',
-  accent: '#dc4d01',
+  accent: '#fa8128',
 };
 
 const players = {
