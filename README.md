@@ -1,7 +1,25 @@
 
 # Decryptid
 
-Decryptid is a simple web app that solves the game of Cryptid for you.
+## 1. Project Overview
+
+Decryptid is a web application designed to help users solve the game of Cryptid. Built with React and styled with TailwindCSS, this app provides an intuitive interface for game enthusiasts to decrypt game scenarios efficiently.
+
+### Key Features:
+- Interactive game board representation
+- Clue management system
+- Automated solution suggestions
+- Responsive design for various devices
+
+## 2. Getting Started
+
+### Prerequisites
+- Node.js (version 12 or higher)
+- Yarn package manager
+
+### Installation
+
+1. Clone the repository:
 
 ![App Screenshot](./assets/images/screenshot.png)
 
