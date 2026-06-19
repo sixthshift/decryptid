@@ -1,0 +1,15 @@
+services:
+  dev:
+    container_name: decryptid-dev
+    build:
+      dockerfile: Dockerfile
+    working_dir: /usr/src
+    volumes:
+      - ..:/usr/src
+      - node-modules:/usr/src/node_modules
+    ports:
+      - "8791:8791" # webpack dev server
+    command: ["sleep", "infinity"]
+
+volumes:
+  node-modules:

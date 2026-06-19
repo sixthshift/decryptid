@@ -1,0 +1,47 @@
+{
+  "name": "Decryptid",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/usr/src",
+
+  "containerEnv": {
+    "ENABLE_LSP_TOOLS": "1",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+    "IS_SANDBOX": "1"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "oven.bun-vscode",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "vitest.explorer",
+        "csstools.postcss",
+        "wix.vscode-import-cost",
+        "mhutchie.git-graph",
+        "Anthropic.claude-code"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": ["javascript", "javascriptreact"],
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "forwardPorts": [8791],
+  "portsAttributes": {
+    "8791": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "postCreateCommand": "sudo chown -R vscode:vscode node_modules && bun install",
+
+  "remoteUser": "vscode"
+}
