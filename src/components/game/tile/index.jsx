@@ -4,16 +4,18 @@ import { classNamesPropType, modelPropType } from '../prop-types';
 import Tile from './tile';
 import WithMapEdit from './withMapEdit';
 
+// Build the wrapped component once. Calling WithMapEdit(Tile) inside render
+// produces a new component type every render, which remounts every tile and
+// breaks in-progress drag gestures.
+const MapEditableTile = WithMapEdit(Tile);
+
 function Index({ tile, className, ...props }) {
-  let Component = Tile;
   const [
     {
       ui: { selected },
     },
   ] = useGameContext();
-  if (selected.mode === 'tile') {
-    Component = WithMapEdit(Component);
-  }
+  const Component = selected.mode === 'tile' ? MapEditableTile : Tile;
   return <Component tile={tile} className={className} {...props} />;
 }
 

@@ -61,18 +61,18 @@ export default (state, action) => {
   }
 
   if (action.type === 'decrypt') {
-    return state.map((hex) => {
-      if (action.payload.includes(hex.coordinates)) {
-        return {
-          ...hex,
-          isCandidate: true,
-        };
+    let changed = false;
+    const next = state.map((hex) => {
+      const isCandidate = action.payload.includes(hex.coordinates);
+      if (hex.isCandidate === isCandidate) {
+        return hex;
       }
-      return {
-        ...hex,
-        isCandidate: false,
-      };
+      changed = true;
+      return { ...hex, isCandidate };
     });
+    // Preserve referential identity when nothing changed so the decrypt
+    // effect in <Game> can converge instead of re-dispatching forever.
+    return changed ? next : state;
   }
 
   return state;
