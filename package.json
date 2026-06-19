@@ -7,42 +7,37 @@
 	"author": "Jason Huang <sixth.shifts@gmail.com>",
 	"license": "MIT",
 	"private": true,
+	"engines": {
+		"node": ">=20"
+	},
 	"dependencies": {
-		"classnames": "^2.3.1",
+		"classnames": "^2.5.1",
 		"lodash": "^4.17.21",
 		"prop-types": "^15.8.1",
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0"
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.18.2",
-		"@babel/preset-env": "^7.18.2",
-		"@babel/preset-react": "^7.17.12",
-		"autoprefixer": "^10.4.7",
-		"babel-loader": "^8.2.5",
-		"css-loader": "^6.7.1",
-		"eslint": "^7.32.0 || ^8.2.0",
+		"@vitejs/plugin-react": "^6.0.2",
+		"autoprefixer": "^10.4.20",
+		"eslint": "^8.57.1",
 		"eslint-config-airbnb": "^19.0.4",
-		"eslint-plugin-import": "^2.25.3",
-		"eslint-plugin-jest": "^26.4.6",
-		"eslint-plugin-jsx-a11y": "^6.5.1",
-		"eslint-plugin-react": "^7.28.0",
-		"eslint-plugin-react-hooks": "^4.3.0",
-		"eslint-plugin-tailwindcss": "^3.5.0",
-		"html-webpack-plugin": "^5.5.0",
-		"jest": "^28.1.0",
-		"postcss": "^8.4.14",
-		"postcss-loader": "^7.0.0",
-		"style-loader": "^3.3.1",
-		"tailwindcss": "^3.0.24",
-		"webpack": "^5.73.0",
-		"webpack-cli": "^4.9.2",
-		"webpack-dev-server": "^4.9.1"
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-jest": "^28.9.0",
+		"eslint-plugin-jsx-a11y": "^6.10.2",
+		"eslint-plugin-react": "^7.37.2",
+		"eslint-plugin-react-hooks": "^4.6.2",
+		"eslint-plugin-tailwindcss": "^3.17.5",
+		"postcss": "^8.4.49",
+		"tailwindcss": "^3.4.17",
+		"vite": "^8.0.16",
+		"vitest": "^4.1.9"
 	},
 	"scripts": {
-		"build": "webpack build --mode production",
-		"dev": "webpack build --mode development",
-		"serve": "webpack serve --mode development",
-		"test": "jest"
+		"build": "vite build",
+		"dev": "vite",
+		"serve": "vite",
+		"preview": "vite preview",
+		"test": "vitest run"
 	}
 }

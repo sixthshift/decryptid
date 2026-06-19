@@ -14,8 +14,8 @@ Decryptid is a web application designed to help users solve the game of Cryptid.
 ## 2. Getting Started
 
 ### Prerequisites
-- Node.js (version 12 or higher)
-- Yarn package manager
+- Node.js (version 20 or higher)
+- Bun package manager
 
 ### Installation
 
@@ -41,36 +41,28 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn install
+  bun install
 ```
 
 Start the server
 
 ```bash
-  yarn serve
+  bun run serve
 ```
 
 
-## Run Locally with Docker Dev Container
+## Run in a Dev Container
 
-#### You will need Docker and Docker Compose as a prerequisite
+#### You will need Docker and VS Code with the Dev Containers extension
 
-Clone the project
+Open the project in VS Code and run **Dev Containers: Reopen in Container** from
+the command palette. The container (Node 20 + Bun, defined in `.devcontainer/`)
+builds, installs dependencies, and forwards the dev server on port 8791.
 
-```bash
-  git clone https://github.com/sixthshift/decryptid
-```
-
-Go to the project directory
+Then start the server from the container terminal:
 
 ```bash
-  cd decryptid
-```
-
-Spin up the docker Container
-
-```bash
-  docker-compose up
+  bun run serve
 ```
 
 
@@ -79,7 +71,7 @@ Spin up the docker Container
 To run tests, run the following command
 
 ```bash
-  yarn test
+  bun run test
 ```
 
 

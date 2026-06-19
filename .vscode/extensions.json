@@ -7,7 +7,7 @@
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "eg2.vscode-npm-script",
-    "orta.vscode-jest",
+    "vitest.explorer",
     "csstools.postcss",
     "wix.vscode-import-cost"
   ],

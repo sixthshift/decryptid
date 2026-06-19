@@ -10,9 +10,6 @@
   "eslint.validate": ["javascript"],
   "files.associations": {
   "*.css": "tailwindcss"
-  },
-  
-  "jest.jestCommandLine": "yarn test",
-  
+  }
  }
  
