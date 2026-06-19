@@ -1,9 +1,11 @@
-import classNames from 'classnames';
 import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
 import { toPoints } from './utils';
 
-function Candidate() {
+// A translucent veil in the background colour, washing the terrain toward the
+// page so eliminated hexes recede. pointer-events-none keeps the hex clickable
+// for placement underneath.
+function Veil() {
   const [
     {
       ui: { radius },
@@ -11,37 +13,32 @@ function Candidate() {
   ] = useGameContext();
   return (
     <polygon
-      className={classNames([
-        'pointer-events-none',
-        'fill-transparent',
-        'stroke-accent',
-        'stroke-[4]',
-      ])}
-      points={toPoints(6, radius * 0.9)
+      className="pointer-events-none fill-secondary opacity-60"
+      points={toPoints(6, radius)
         .map(({ x, y }) => `${x}, ${y}`)
         .join(' ')}
     />
   );
 }
 
-const WithDecryption = (Component) => {
-  function Decryption({ model, children }) {
+const WithDimming = (Component) => {
+  function Dimming({ model, children }) {
     return (
       <Component model={model}>
         {children}
-        <Candidate />
+        <Veil />
       </Component>
     );
   }
 
-  Decryption.propTypes = {
+  Dimming.propTypes = {
     model: modelPropType.isRequired,
     children: childrenPropType,
   };
-  Decryption.defaultProps = {
+  Dimming.defaultProps = {
     children: null,
   };
-  return Decryption;
+  return Dimming;
 };
 
-export default WithDecryption;
+export default WithDimming;
