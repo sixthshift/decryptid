@@ -1,8 +1,6 @@
-import React from 'react';
-
 function Cube() {
   return (
-    <svg width="24" height="24" stroke="currentColor">
+    <svg width="24" height="24" stroke="currentColor" aria-hidden="true">
       <g
         fillOpacity="0"
         strokeLinecap="butt"

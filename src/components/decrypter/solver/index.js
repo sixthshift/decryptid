@@ -1,7 +1,4 @@
-/* eslint-disable comma-dangle */
-import {
-  difference, intersectionWith, isEqual, times, union
-} from 'lodash';
+import { difference, intersectionWith, isEqual, times, union } from 'lodash';
 
 /**
  *
@@ -28,16 +25,17 @@ export const navigate = (board, hex, radius) => {
      */
     within.forEach((hexWithin) => {
       const neighbours = movements.reduce((acc, movement) => {
-      /**
-       * Attempt to find the neighbour of the current hex with the given movement
-       * This should be successful so long as the hex exists, i.e. it is not on the edge of the baord
-       * If this neighbour exists, add it to the accumulator
-       */
-        const neighbour = board.find((hexFromBoard) => (
-          hexFromBoard.coordinates.q === hexWithin.coordinates.q + movement.q
-        && hexFromBoard.coordinates.r === hexWithin.coordinates.r + movement.r
-        && hexFromBoard.coordinates.s === hexWithin.coordinates.s + movement.s
-        ));
+        /**
+         * Attempt to find the neighbour of the current hex with the given movement
+         * This should be successful so long as the hex exists, i.e. it is not on the edge of the baord
+         * If this neighbour exists, add it to the accumulator
+         */
+        const neighbour = board.find(
+          (hexFromBoard) =>
+            hexFromBoard.coordinates.q === hexWithin.coordinates.q + movement.q &&
+            hexFromBoard.coordinates.r === hexWithin.coordinates.r + movement.r &&
+            hexFromBoard.coordinates.s === hexWithin.coordinates.s + movement.s,
+        );
         if (neighbour) {
           acc.push(neighbour);
         }
@@ -75,8 +73,7 @@ export const evaluate = (board, rule) => {
         }
         return rule.value.includes(hex[rule.type]);
       }) // Start with the directly satisfying hexes first
-      .map((hex) => navigate(board, hex, rule.within)) // Get all other hex within the rule radius
-      .flat()
+      .flatMap((hex) => navigate(board, hex, rule.within)),
   );
   let hexesBeyondRule = difference(board, hexesWithinRule); // Collect the remaining hexes that have not satisfied the rule
   if (rule.inverted) {
@@ -99,9 +96,9 @@ export const isRuleValidForColour = (board, rule, colour) => {
      * To pass, this hex must:
      * (not contain a cube) AND (either contain a disc or nothing)
      */
-    const containsCube = hex.clues.some((clue) => (clue.type === 'cube' && clue.colour === colour));
-    const containsDisc = hex.clues.some((clue) => (clue.type === 'disc' && clue.colour === colour));
-    const containsNothing = !hex.clues.some((clue) => (clue.colour === colour));
+    const containsCube = hex.clues.some((clue) => clue.type === 'cube' && clue.colour === colour);
+    const containsDisc = hex.clues.some((clue) => clue.type === 'disc' && clue.colour === colour);
+    const containsNothing = !hex.clues.some((clue) => clue.colour === colour);
     return !containsCube && (containsDisc || containsNothing);
   });
   const hexBeyondRuleSatisfies = hexesBeyondRule.every((hex) => {
@@ -109,9 +106,9 @@ export const isRuleValidForColour = (board, rule, colour) => {
      * To pass, this hex must:
      * (not contain a disc) AND (either contain a cube or nothing)
      */
-    const containsCube = hex.clues.some((clue) => (clue.type === 'cube' && clue.colour === colour));
-    const containsDisc = hex.clues.some((clue) => (clue.type === 'disc' && clue.colour === colour));
-    const containsNothing = !hex.clues.some((clue) => (clue.colour === colour));
+    const containsCube = hex.clues.some((clue) => clue.type === 'cube' && clue.colour === colour);
+    const containsDisc = hex.clues.some((clue) => clue.type === 'disc' && clue.colour === colour);
+    const containsNothing = !hex.clues.some((clue) => clue.colour === colour);
 
     return !containsDisc && (containsCube || containsNothing);
   });
@@ -129,11 +126,13 @@ export const isRuleValidForColour = (board, rule, colour) => {
 export const solveForRule = (board, players, rule) => ({
   ...rule,
   solution: players
-    .filter((player) => board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour))) // Don't solve for players who are not playing
+    .filter((player) =>
+      board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour)),
+    ) // Don't solve for players who are not playing
     .reduce((acc, player) => {
       acc[player.colour] = isRuleValidForColour(board, rule, player.colour);
       return acc;
-    }, {})
+    }, {}),
 });
 
 /**
@@ -141,15 +140,23 @@ export const solveForRule = (board, players, rule) => ({
  * @param {*} game
  * @returns A ruleset with the solutions updated according to the provided state
  */
-export const solve = ({ board, players, ruleset }) => ruleset.map((rule) => solveForRule(board, players, rule));
+export const solve = ({ board, players, ruleset }) =>
+  ruleset.map((rule) => solveForRule(board, players, rule));
 
-export const decrypt = ({ board, players, ruleset }, inversion) => intersectionWith(...players
-  .filter((player) => board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour)))
-  .map((player) => ruleset
-    .filter((rule) => (rule.inverted ? inversion : true))
-    .filter((rule) => !!rule.solution[player.colour])
-    .map((rule) => {
-      const [candidateHexes] = evaluate(board, rule);
-      return candidateHexes;
-    }).flat()), isEqual)
-  .map((hex) => hex.coordinates);
+export const decrypt = ({ board, players, ruleset }, inversion) =>
+  intersectionWith(
+    ...players
+      .filter((player) =>
+        board.some((hex) => hex.clues.some((clue) => clue.colour === player.colour)),
+      )
+      .map((player) =>
+        ruleset
+          .filter((rule) => (rule.inverted ? inversion : true))
+          .filter((rule) => !!rule.solution[player.colour])
+          .flatMap((rule) => {
+            const [candidateHexes] = evaluate(board, rule);
+            return candidateHexes;
+          }),
+      ),
+    isEqual,
+  ).map((hex) => hex.coordinates);

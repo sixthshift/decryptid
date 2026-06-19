@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-multi-assign */
-import React from 'react';
 import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
 import Hex from './hex';
@@ -10,7 +7,11 @@ import WithPlacement from './withPlacement';
 
 function Index({ model, children }) {
   let Component = Hex;
-  const [{ ui: { selected } }] = useGameContext();
+  const [
+    {
+      ui: { selected },
+    },
+  ] = useGameContext();
   if (selected.mode === 'tile') {
     Component = WithMapEdit(Component);
   }
@@ -20,11 +21,7 @@ function Index({ model, children }) {
   if (model.isCandidate) {
     Component = WithDecryption(Component);
   }
-  return (
-    <Component model={model}>
-      {children}
-    </Component>
-  );
+  return <Component model={model}>{children}</Component>;
 }
 
 Index.propTypes = {

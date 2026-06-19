@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import classNames from 'classnames';
 import { inRange } from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useGameContext } from '../../context';
 import { classNamesPropType, modelPropType } from '../prop-types';
 
@@ -20,20 +19,17 @@ const useDoubleClick = (onDoubleClick) => {
   };
 };
 
-const useDragSVG = ({
-  onPointerDown, onPointerMove, onPointerUp, dropZones, onDrop,
-}) => {
+const useDragSVG = ({ onPointerDown, onPointerMove, onPointerUp, dropZones, onDrop }) => {
   const drag = useRef({
     active: false,
     initial: { x: undefined, y: undefined },
     delta: { x: 0, y: 0 },
   });
 
-  const pointerCoordinates = (e) => (
+  const pointerCoordinates = (e) =>
     e.changedTouches
       ? { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY }
-      : { x: e.pageX, y: e.pageY }
-  );
+      : { x: e.pageX, y: e.pageY };
 
   const onDown = useCallback((e) => {
     drag.current = { ...drag.current, active: true, initial: pointerCoordinates(e) };
@@ -52,7 +48,10 @@ const useDragSVG = ({
           y: (y - drag.current.initial.y) / scaleY,
         },
       };
-      e.currentTarget.setAttribute('transform', `translate(${drag.current.delta.x},${drag.current.delta.y})`);
+      e.currentTarget.setAttribute(
+        'transform',
+        `translate(${drag.current.delta.x},${drag.current.delta.y})`,
+      );
       onPointerMove?.(e);
     }
   });
@@ -66,14 +65,15 @@ const useDragSVG = ({
         initial: { x: undefined, y: undefined },
         delta: { x: 0, y: 0 },
       };
-      e.currentTarget.setAttribute('transform', `translate(${drag.current.delta.x},${drag.current.delta.y})`);
+      e.currentTarget.setAttribute(
+        'transform',
+        `translate(${drag.current.delta.x},${drag.current.delta.y})`,
+      );
       if (dropZones) {
         const dropped = dropZones(e)
-          .filter((dropZone) => (e.currentTarget !== dropZone))
+          .filter((dropZone) => e.currentTarget !== dropZone)
           .find((dropZone) => {
-            const {
-              top, bottom, left, right,
-            } = dropZone.getBoundingClientRect();
+            const { top, bottom, left, right } = dropZone.getBoundingClientRect();
             const { x, y } = pointerCoordinates(e);
             return inRange(x, left, right) && inRange(y, top, bottom);
           });
@@ -98,13 +98,15 @@ const useDragSVG = ({
 };
 
 const WithMapEdit = (Component) => {
-  function MapEdit({
-    id, tile, className, ...props
-  }) {
+  function MapEdit({ id, tile, className, ...props }) {
     const [, dispatch] = useGameContext();
-    const doubleClick = useDoubleClick(() => { dispatch({ type: 'flip', payload: id }); });
+    const doubleClick = useDoubleClick(() => {
+      dispatch({ type: 'flip', payload: id });
+    });
     const dragAndDrop = useDragSVG({
-      onPointerUp: () => { doubleClick(); },
+      onPointerUp: () => {
+        doubleClick();
+      },
       dropZones: (e) => Array.from(e.currentTarget.closest('svg').querySelectorAll('.tile')),
       onDrop: (e, dropped) => {
         const tileA = e.currentTarget;

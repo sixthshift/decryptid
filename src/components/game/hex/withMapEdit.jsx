@@ -1,4 +1,3 @@
-import React from 'react';
 import { childrenPropType, modelPropType } from '../prop-types';
 
 const WithMapEdit = (Component) => {

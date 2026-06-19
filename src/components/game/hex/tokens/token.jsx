@@ -1,13 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useGameContext } from '../../../context';
 import { toPoints } from '../utils';
 
 function Token({ token, ...props }) {
-  const [{ ui: { radius } }] = useGameContext();
-  let sides; let
-    size;
+  const [
+    {
+      ui: { radius },
+    },
+  ] = useGameContext();
+  let sides;
+  let size;
   if (token.type === 'cube') {
     sides = 4;
     size = 0.15;
@@ -25,7 +27,9 @@ function Token({ token, ...props }) {
     <polygon
       key={`${token.type} ${token.colour}`}
       className={`fill-${token.colour}`}
-      points={toPoints(sides, radius * size).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
+      points={toPoints(sides, radius * size)
+        .map(({ x, y }) => `${x}, ${y}`)
+        .join(' ')}
       {...props}
     />
   );

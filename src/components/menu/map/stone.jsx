@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGameContext } from '../../context';
 import Icon from '../../icons/stone';
 import ColourMenu from '../colour-menu';
@@ -6,7 +5,13 @@ import MenuItem from '../menu-item';
 
 function Stone() {
   const id = 'stone';
-  const [{ game: { structures }, ui: { selected } }, dispatch] = useGameContext();
+  const [
+    {
+      game: { structures },
+      ui: { selected },
+    },
+    dispatch,
+  ] = useGameContext();
 
   const onClick = () => {
     if (selected.mode === id) {
@@ -17,13 +22,13 @@ function Stone() {
   };
   return (
     <ColourMenu
-      menuItem={(
+      menuItem={
         <MenuItem onClick={onClick} selected={id === selected.mode}>
           <Icon />
         </MenuItem>
-        )}
+      }
       id={id}
-      colours={structures.map((structure) => ([structure.colour, structure.stone]))}
+      colours={structures.map((structure) => [structure.colour, structure.stone])}
     />
   );
 }

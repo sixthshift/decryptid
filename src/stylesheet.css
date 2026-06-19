@@ -17,23 +17,23 @@
 @tailwind utilities;
 
 :root {
-	--animation-slide-delay: 1s
+  --animation-slide-delay: 1s;
 }
 
 html,
 body,
 #root {
-	@apply overflow-hidden h-full max-h-screen;
-	-webkit-tap-highlight-color: transparent;
+  @apply overflow-hidden h-full max-h-screen;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .auto-rotate {
-	@apply flex portrait:flex-row landscape:flex-col;
+  @apply flex portrait:flex-row landscape:flex-col;
 }
 .auto-rotate-invert {
-	@apply flex portrait:flex-col landscape:flex-row;
+  @apply flex portrait:flex-col landscape:flex-row;
 }
 
-.menu > *{
-	@apply first:portrait:flex-row-reverse first:landscape:flex-col-reverse;
+.menu > * {
+  @apply first:portrait:flex-row-reverse first:landscape:flex-col-reverse;
 }

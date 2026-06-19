@@ -1,11 +1,15 @@
-import React from 'react';
 import { useGameContext } from '../../context';
 import Icon from '../../icons/tile';
 import MenuItem from '../menu-item';
 
 function Tile() {
   const id = 'tile';
-  const [{ ui: { selected } }, dispatch] = useGameContext();
+  const [
+    {
+      ui: { selected },
+    },
+    dispatch,
+  ] = useGameContext();
 
   const onClick = () => {
     if (selected.mode === id) {

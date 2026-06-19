@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGameContext } from '../../context';
 import Icon from '../../icons/invert';
 import MenuItem from '../menu-item';

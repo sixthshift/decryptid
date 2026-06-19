@@ -1,8 +1,6 @@
-import React from 'react';
-
 function Stone() {
   return (
-    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor">
+    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor" aria-hidden="true">
       <g
         fillOpacity="0"
         strokeLinecap="butt"

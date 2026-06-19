@@ -1,5 +1,8 @@
 export default (state, action) => {
-  if (action.type === 'place' && (action.payload.mode === 'shack' || action.payload.mode === 'stone')) {
+  if (
+    action.type === 'place' &&
+    (action.payload.mode === 'shack' || action.payload.mode === 'stone')
+  ) {
     return state.map((structure) => {
       if (structure.colour === action.payload.colour) {
         return {
@@ -10,7 +13,10 @@ export default (state, action) => {
       return structure;
     });
   }
-  if (action.type === 'unplace' && (action.payload.mode === 'shack' || action.payload.mode === 'stone')) {
+  if (
+    action.type === 'unplace' &&
+    (action.payload.mode === 'shack' || action.payload.mode === 'stone')
+  ) {
     return state.map((structure) => {
       if (structure.colour === action.payload.colour) {
         return {

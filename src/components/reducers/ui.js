@@ -5,7 +5,6 @@ const initialState = {
   inversion: false,
 };
 
-// eslint-disable-next-line default-param-last
 export default (state = initialState, action) => {
   if (action.type === 'select') {
     return {
@@ -28,4 +27,4 @@ export default (state = initialState, action) => {
   return state;
 };
 
-export const getMode = (state) => (state.ui.selected.mode);
+export const getMode = (state) => state.ui.selected.mode;

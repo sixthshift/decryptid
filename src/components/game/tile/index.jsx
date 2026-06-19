@@ -1,7 +1,4 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useGameContext } from '../../context';
 import { classNamesPropType, modelPropType } from '../prop-types';
 import Tile from './tile';
@@ -9,7 +6,11 @@ import WithMapEdit from './withMapEdit';
 
 function Index({ tile, className, ...props }) {
   let Component = Tile;
-  const [{ ui: { selected } }] = useGameContext();
+  const [
+    {
+      ui: { selected },
+    },
+  ] = useGameContext();
   if (selected.mode === 'tile') {
     Component = WithMapEdit(Component);
   }

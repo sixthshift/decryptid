@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import reducer from './reducers';
 
 const GameContext = createContext();
@@ -21,10 +21,7 @@ function GameContextProvider({ children }) {
 }
 
 GameContextProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
-export { GameContext, useGameContext, GameContextProvider };
+export { GameContext, GameContextProvider, useGameContext };

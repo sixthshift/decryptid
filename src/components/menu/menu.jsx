@@ -1,19 +1,13 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
 function Menu({ children }) {
   return (
-    <div className="flex-wrap gap-2.5 justify-center items-center menu auto-rotate">
-      { children }
-    </div>
+    <div className="menu auto-rotate flex-wrap items-center justify-center gap-2.5">{children}</div>
   );
 }
 
 Menu.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 Menu.defaultProps = {

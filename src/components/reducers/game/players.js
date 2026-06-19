@@ -1,5 +1,8 @@
 export default (state, action) => {
-  if (action.type === 'place' && (action.payload.mode === 'cube' || action.payload.mode === 'disc')) {
+  if (
+    action.type === 'place' &&
+    (action.payload.mode === 'cube' || action.payload.mode === 'disc')
+  ) {
     return state.map((player) => {
       if (player.colour === action.payload.colour) {
         return {
@@ -10,7 +13,10 @@ export default (state, action) => {
       return player;
     });
   }
-  if (action.type === 'unplace' && (action.payload.mode === 'cube' || action.payload.mode === 'disc')) {
+  if (
+    action.type === 'unplace' &&
+    (action.payload.mode === 'cube' || action.payload.mode === 'disc')
+  ) {
     return state.map((player) => {
       if (player.colour === action.payload.colour) {
         return {

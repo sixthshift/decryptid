@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run Biome on staged files before committing.
+# Enable with: git config core.hooksPath .githooks
+bunx biome check --staged --no-errors-on-unmatched --files-ignore-unknown=true

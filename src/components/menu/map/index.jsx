@@ -1,10 +1,9 @@
-import React from 'react';
 import Menu from '../menu';
 import Shack from './shack';
 import Stone from './stone';
 import Tile from './tile';
 
-function Map() {
+function MapMenu() {
   return (
     <Menu>
       <Stone />
@@ -14,4 +13,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default MapMenu;

@@ -1,15 +1,20 @@
 import classNames from 'classnames';
-import React from 'react';
 import { useGameContext } from '../../context';
 import { childrenPropType, modelPropType } from '../prop-types';
 import { toPoints } from './utils';
 
 function Candidate() {
-  const [{ ui: { radius } }] = useGameContext();
+  const [
+    {
+      ui: { radius },
+    },
+  ] = useGameContext();
   return (
     <polygon
       className={classNames(['fill-transparent', 'stroke-accent', 'stroke-[4]', 'animate-pulse'])}
-      points={toPoints(6, radius * 0.9).map(({ x, y }) => (`${x}, ${y}`)).join(' ')}
+      points={toPoints(6, radius * 0.9)
+        .map(({ x, y }) => `${x}, ${y}`)
+        .join(' ')}
     />
   );
 }

@@ -1,8 +1,9 @@
 const { keys } = require('lodash');
 
-const product = (prefixes, suffixes) => prefixes
-  .reduce((acc, prefix) => [...acc, ...suffixes.map((suffix) => [prefix, suffix])], [])
-  .map((tuple) => (tuple.join('-')));
+const product = (prefixes, suffixes) =>
+  prefixes
+    .flatMap((prefix) => suffixes.map((suffix) => [prefix, suffix]))
+    .map((tuple) => tuple.join('-'));
 
 const colors = {
   primary: '#464b2d',
@@ -51,32 +52,30 @@ module.exports = {
       ...territories,
     },
     animation: {
-      pulse: "pulse 2s linear infinite"
+      pulse: 'pulse 2s linear infinite',
     },
     keyframes: {
       pulse: {
         '0%, 100%': {
-          opacity: '0'
+          opacity: '0',
         },
         '10%': {
           opacity: '1',
         },
-      }
+      },
     },
   },
   safelist: [
-    ...product([
-      'bg',
-      'fill',
-      'stroke',
-      'text',
-    ], [
-      ...keys(colors),
-      ...keys(players),
-      ...keys(structures),
-      ...keys(terrains),
-      ...keys(territories),
-    ]),
+    ...product(
+      ['bg', 'fill', 'stroke', 'text'],
+      [
+        ...keys(colors),
+        ...keys(players),
+        ...keys(structures),
+        ...keys(terrains),
+        ...keys(territories),
+      ],
+    ),
   ],
   plugins: [],
 };

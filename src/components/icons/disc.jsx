@@ -1,14 +1,7 @@
-import React from 'react';
-
 function Disc() {
   return (
-    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor">
-      <g
-        fillOpacity="0"
-        strokeLinejoin="miter"
-        strokeOpacity="1"
-        strokeWidth="0.5"
-      >
+    <svg width="24" height="24" viewBox="0 0 6.35 6.35" stroke="currentColor" aria-hidden="true">
+      <g fillOpacity="0" strokeLinejoin="miter" strokeOpacity="1" strokeWidth="0.5">
         <ellipse
           cx="3.175"
           cy="2.117"

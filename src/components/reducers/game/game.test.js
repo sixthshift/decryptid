@@ -1,6 +1,6 @@
 import { omit } from 'lodash';
-import reducer from '.';
 import config from '../../../config';
+import reducer from '.';
 
 describe('game', () => {
   let state;
@@ -9,6 +9,6 @@ describe('game', () => {
   });
   it('should initialise correctly using the config state', () => {
     expect(omit(state, 'ruleset')).toEqual(omit(config, 'ruleset'));
-    expect(state.ruleset).toEqual(config.ruleset.map((rule) => (expect.objectContaining(rule))));
+    expect(state.ruleset).toEqual(config.ruleset.map((rule) => expect.objectContaining(rule)));
   });
 });
