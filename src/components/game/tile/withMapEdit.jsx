@@ -98,7 +98,7 @@ const useDragSVG = ({ onPointerDown, onPointerMove, onPointerUp, dropZones, onDr
 };
 
 const WithMapEdit = (Component) => {
-  function MapEdit({ id, tile, className, ...props }) {
+  function MapEdit({ id, tile, className = '', ...props }) {
     const [, dispatch] = useGameContext();
     const doubleClick = useDoubleClick(() => {
       dispatch({ type: 'flip', payload: id });
@@ -131,10 +131,6 @@ const WithMapEdit = (Component) => {
     tile: PropTypes.arrayOf(modelPropType).isRequired,
     className: classNamesPropType,
   };
-  MapEdit.defaultProps = {
-    className: '',
-  };
-
   return MapEdit;
 };
 

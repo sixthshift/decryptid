@@ -9,7 +9,7 @@ import WithMapEdit from './withMapEdit';
 // breaks in-progress drag gestures.
 const MapEditableTile = WithMapEdit(Tile);
 
-function Index({ tile, className, ...props }) {
+function Index({ tile, className = '', ...props }) {
   const [
     {
       ui: { selected },
@@ -25,8 +25,4 @@ Index.propTypes = {
   id: PropTypes.number.isRequired,
   tile: PropTypes.arrayOf(modelPropType).isRequired,
   className: classNamesPropType,
-};
-
-Index.defaultProps = {
-  className: '',
 };

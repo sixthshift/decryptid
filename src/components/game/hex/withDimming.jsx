@@ -22,7 +22,7 @@ function Veil() {
 }
 
 const WithDimming = (Component) => {
-  function Dimming({ model, children }) {
+  function Dimming({ model, children = null }) {
     return (
       <Component model={model}>
         {children}
@@ -34,9 +34,6 @@ const WithDimming = (Component) => {
   Dimming.propTypes = {
     model: modelPropType.isRequired,
     children: childrenPropType,
-  };
-  Dimming.defaultProps = {
-    children: null,
   };
   return Dimming;
 };

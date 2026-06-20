@@ -1,7 +1,7 @@
 import { childrenPropType, modelPropType } from '../prop-types';
 
 const WithMapEdit = (Component) => {
-  function MapEdit({ model, children }) {
+  function MapEdit({ model, children = null }) {
     return (
       <Component model={model}>
         {children}
@@ -16,9 +16,6 @@ const WithMapEdit = (Component) => {
   MapEdit.propTypes = {
     model: modelPropType.isRequired,
     children: childrenPropType,
-  };
-  MapEdit.defaultProps = {
-    children: null,
   };
   return MapEdit;
 };

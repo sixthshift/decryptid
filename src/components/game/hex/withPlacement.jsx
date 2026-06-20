@@ -13,7 +13,7 @@ const canPlace = (availableTokens, hex, mode, colour) =>
 const canUnplace = isTokenOnHex;
 
 const WithPlacement = (Component) => {
-  function Placement({ model, className, children, ...props }) {
+  function Placement({ model, className = '', children = null, ...props }) {
     const [
       {
         ui: {
@@ -48,10 +48,6 @@ const WithPlacement = (Component) => {
     model: modelPropType.isRequired,
     className: classNamesPropType,
     children: childrenPropType,
-  };
-  Placement.defaultProps = {
-    className: '',
-    children: null,
   };
   return Placement;
 };

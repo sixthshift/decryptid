@@ -10,7 +10,7 @@ import WithPlacement from './withPlacement';
 // the dimming so the answer "pops" in the endgame.
 const ENDGAME_THRESHOLD = 6;
 
-function Index({ model, children }) {
+function Index({ model, children = null }) {
   let Component = Hex;
   const [
     {
@@ -43,10 +43,6 @@ function Index({ model, children }) {
 Index.propTypes = {
   model: modelPropType.isRequired,
   children: childrenPropType,
-};
-
-Index.defaultProps = {
-  children: null,
 };
 
 export default Index;

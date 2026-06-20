@@ -6,7 +6,7 @@ import Territory from './territory';
 import Tokens from './tokens';
 import { hexToPixel, toPoints } from './utils';
 
-function Hex({ model, children, ...props }) {
+function Hex({ model, children = null, ...props }) {
   const [
     {
       ui: { radius, spacing },
@@ -33,10 +33,6 @@ function Hex({ model, children, ...props }) {
 Hex.propTypes = {
   model: modelPropType.isRequired,
   children: childrenPropType,
-};
-
-Hex.defaultProps = {
-  children: null,
 };
 
 export default Hex;

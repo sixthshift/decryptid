@@ -10,8 +10,4 @@ Menu.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
-Menu.defaultProps = {
-  children: undefined,
-};
-
 export default Menu;

@@ -25,7 +25,7 @@ function Candidate() {
 }
 
 const WithDecryption = (Component) => {
-  function Decryption({ model, children }) {
+  function Decryption({ model, children = null }) {
     return (
       <Component model={model}>
         {children}
@@ -37,9 +37,6 @@ const WithDecryption = (Component) => {
   Decryption.propTypes = {
     model: modelPropType.isRequired,
     children: childrenPropType,
-  };
-  Decryption.defaultProps = {
-    children: null,
   };
   return Decryption;
 };

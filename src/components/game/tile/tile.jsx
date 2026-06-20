@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Hex from '../hex';
 import { classNamesPropType, modelPropType } from '../prop-types';
 
-function Tile({ id, tile, className, ...props }) {
+function Tile({ id, tile, className = '', ...props }) {
   return (
     <g className={classNames(className, 'tile')} id={id} {...props}>
       {tile.map((hex) => (
@@ -18,8 +18,4 @@ Tile.propTypes = {
   tile: PropTypes.arrayOf(modelPropType).isRequired,
   className: classNamesPropType,
 };
-Tile.defaultProps = {
-  className: '',
-};
-
 export default Tile;
