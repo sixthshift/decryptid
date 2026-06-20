@@ -4,6 +4,4 @@ node_modules/
 
 *.log
 
-tailwind.generated.css
-
 .DS_Store

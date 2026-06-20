@@ -40,7 +40,7 @@ const territories = {
   bear: '#000000',
 };
 module.exports = {
-  content: ['./src/*.html', './src/**/*.jsx'],
+  content: ['./index.html', './src/**/*.jsx'],
   theme: {
     colors: {
       transparent: 'transparent',
@@ -50,19 +50,6 @@ module.exports = {
       ...structures,
       ...terrains,
       ...territories,
-    },
-    animation: {
-      pulse: 'pulse 2s linear infinite',
-    },
-    keyframes: {
-      pulse: {
-        '0%, 100%': {
-          opacity: '0',
-        },
-        '10%': {
-          opacity: '1',
-        },
-      },
     },
   },
   safelist: [

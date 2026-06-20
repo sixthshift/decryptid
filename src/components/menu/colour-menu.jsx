@@ -20,7 +20,6 @@ function ColourMenu({ colours, id, menuItem }) {
         className={classNames(
           'flex h-8 w-8 items-center justify-center rounded-full',
           `bg-${colour}`,
-          // { 'animate-slide-left': selected },
           { invisible: !(id === selected.mode) },
           { 'opacity-30': selected.colour && !(selected.colour === colour) },
         )}

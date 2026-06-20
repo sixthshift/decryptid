@@ -16,10 +16,6 @@
  */
 @tailwind utilities;
 
-:root {
-  --animation-slide-delay: 1s;
-}
-
 html,
 body,
 #root {
